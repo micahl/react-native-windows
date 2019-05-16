@@ -1,6 +1,18 @@
 name: $(Date:yyyyMMdd).$(Rev:.r)
 
-trigger: none # will disable CI builds entirely
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - fb59merge
+      - fabric
+  paths:
+    include:
+      - vnext/*
+    exclude:
+      - vnext/package.json
+      - vnext/yarn.lock
 
 pr: none
 
@@ -42,7 +54,7 @@ jobs:
       - task: CmdLine@2
         displayName: Update package version
         inputs:
-          script: node .ado/updateVersion.js
+          script: node ../.ado/updateVersion.js
           workingDirectory: vnext
 
       - task: Npm@1
@@ -51,6 +63,6 @@ jobs:
           command: custom
           workingDir: vnext
           verbose: false
-          customCommand: 'publish --access public --tag vnext'
+          customCommand: publish --access public --tag $(npmTag)
           customEndpoint: 'React-Native-Windows NPM'
           publishEndpoint: 'React-Native-Windows NPM'
