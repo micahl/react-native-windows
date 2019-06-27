@@ -1,0 +1,19 @@
+import "ReactNativeHost.idl";
+import "ReactApplicationDelegate.idl";
+
+namespace Microsoft.React
+{
+	interface IReactApplication
+	{
+		ReactNativeHost Host{ get; };
+	};
+
+	[webhosthidden]
+	[default_interface]
+	unsealed runtimeclass ReactApplication : Windows.UI.Xaml.Application, IReactApplication
+	{
+		ReactApplication();
+
+		overridable ReactNativeHost HostCore{ get; };
+	};
+}

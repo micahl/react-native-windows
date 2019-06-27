@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>accd3aa8-1ba0-4223-9bbe-0c431709210b</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{926ab91d-31b4-48c3-b9a4-e681349f27f0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="ReactInit.cpp" />
+    <ClCompile Include="NativeModulesProvider.cpp" />
+    <ClCompile Include="ViewManagersProvider.cpp" />
+    <ClCompile Include="ReactApplication.cpp" />
+    <ClCompile Include="ReactApplicationDelegate.cpp" />
+    <ClCompile Include="ReactInstanceManager.cpp" />
+    <ClCompile Include="ReactNativeHost.cpp" />
+    <ClCompile Include="ReactRootView.cpp" />
+    <ClCompile Include="ReactInstanceManagerBuilder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="ReactInit.h" />
+    <ClInclude Include="NativeModulesProvider.h" />
+    <ClInclude Include="ViewManagersProvider.h" />
+    <ClInclude Include="ReactSupport.h" />
+    <ClInclude Include="ReactApplication.h" />
+    <ClInclude Include="ReactApplicationDelegate.h" />
+    <ClInclude Include="ReactInstanceManager.h" />
+    <ClInclude Include="ReactNativeHost.h" />
+    <ClInclude Include="ReactRootView.h" />
+    <ClInclude Include="ReactInstanceManagerBuilder.h" />
+    <ClInclude Include="LifecycleState.h" />
+    <ClInclude Include="HResult.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="ReactUWPApp.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertySheet.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="ReactApplication.idl" />
+    <Midl Include="ReactNativeHost.idl" />
+    <Midl Include="ReactApplicationDelegate.idl" />
+    <Midl Include="ReactInstanceManager.idl" />
+    <Midl Include="ReactRootView.idl" />
+    <Midl Include="IReactPackage.idl" />
+    <Midl Include="INativeModule.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="$(ReactNativeWindowsDir)Folly\Folly.natvis" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,11 @@
+import "ReactInstance.idl";
+import "INativeModule.idl";
+
+namespace Microsoft.React
+{
+    [webhosthidden]
+    runtimeclass ReactContext
+    {
+        IReactInstance ReactInstance { get; };
+    }
+}

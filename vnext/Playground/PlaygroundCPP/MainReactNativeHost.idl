@@ -1,0 +1,8 @@
+namespace Playground
+{
+	[default_interface]
+    runtimeclass MainReactNativeHost : Microsoft.React.ReactNativeHost
+    {
+        MainReactNativeHost();
+    }
+}

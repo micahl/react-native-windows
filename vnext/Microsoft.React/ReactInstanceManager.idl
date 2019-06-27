@@ -1,0 +1,15 @@
+import "ReactNativeHost.idl";
+
+namespace Microsoft.React
+{
+    [webhosthidden]
+    runtimeclass ReactInstanceManager
+    {
+        ReactInstanceManager();
+        void OnSuspend();
+        void OnEnteredBackground();
+        void OnLeavingBackground();
+        void OnResume(OnResumeAction action);
+        void OnBackPressed();
+    }
+}

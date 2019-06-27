@@ -1,0 +1,13 @@
+import "ReactApplication.idl";
+
+namespace Microsoft.React
+{
+    [webhosthidden]
+	unsealed runtimeclass ReactApplicationDelegate
+	{
+		ReactApplicationDelegate();
+        ReactApplicationDelegate(Windows.UI.Xaml.Application application);
+		void OnActivated(Windows.ApplicationModel.Activation.IActivatedEventArgs args);
+		Windows.UI.Xaml.UIElement OnCreate(String args);
+	}
+}

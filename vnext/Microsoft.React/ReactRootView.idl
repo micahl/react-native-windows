@@ -1,0 +1,9 @@
+namespace Microsoft.React
+{
+    [default_interface]
+    [webhosthidden]
+    runtimeclass ReactRootView : Windows.UI.Xaml.Controls.Grid
+    {
+        ReactRootView();
+    }
+}

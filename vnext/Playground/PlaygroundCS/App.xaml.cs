@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -12,55 +14,51 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using react.uwp;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using Microsoft.React;
 
 namespace Playground
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : Page
-    {
-    const string JSFILENAME = "Playground/Playground/index.uwp";
-    const string JSCOMPONENTNAME = "Playground";
+  /// <summary>
+  /// Provides application-specific behavior to supplement the default Application class.
+  /// </summary>
+  sealed partial class App : ReactApplication
+  {
+    private MainReactNativeHost _host = new MainReactNativeHost();
 
-    public MainPage()
-        {
-            this.InitializeComponent();
-            LoadReact();
+    /// <summary>
+    /// Initializes the singleton application object.  This is the first line of authored code
+    /// executed, and as such is the logical equivalent of main() or WinMain().
+    /// </summary>
+    public App()
+    {
+      this.InitializeComponent();
     }
 
-    private void LoadReact()
+    protected override ReactNativeHost HostCore => _host;
+  }
+
+  sealed class MainReactNativeHost : ReactNativeHost
+  {
+    protected override string MainComponentName => "Playground";
+    protected override string JavaScriptMainModuleName => "Playground/index.uwp";
+    protected override IReadOnlyList<IReactPackage> Packages
     {
-      InstanceSettings settings;
-      settings.UseWebDebugger = true;
-      settings.UseLiveReload = true;
-
-      var instance = Instance.Create(JSFILENAME);
-
-      //instantiate sample module for registering callbacks for live reload, JS error handling etc.,
-      instance.RegisterModule(new SampleModule());
-      instance.Start(settings);
-
-      RootElement.Instance = instance;
-
-      //Setup sample initial properties for initializing UI thread
-      string initialProps = "{ "
-          + "\"one\":\"1\""
-          + ", \"two\":\"2\""
-          + "}";
-
-      RootElement.InitialProps = initialProps;
-
-      RootElement.JsComponentName = JSCOMPONENTNAME;
-
-      RootElement.StartRender();
+      get
+      {
+        return new[] { new AppModulePackage() };
+      }
     }
   }
 
-  public class SampleModule : react.uwp.IModule
+  sealed class AppModulePackage : IReactPackage
+  {
+    public IReadOnlyList<INativeModule> CreateNativeModules(ReactContext reactContext)
+    {
+      return new List<INativeModule>() { new SampleModule() };
+    }
+  }
+
+  public class SampleModule : Microsoft.React.INativeModule
   {
     Dictionary<string, string> _constants;
     Dictionary<string, MethodDelegate> m_delegates = new Dictionary<string, MethodDelegate>();
@@ -118,4 +116,3 @@ namespace Playground
     }
   }
 }
-

@@ -1,0 +1,11 @@
+import "INativeModule.idl";
+import "ReactContext.idl";
+
+namespace Microsoft.React
+{
+  [webhosthidden]
+  interface IReactPackage
+  {
+	  IVectorView<INativeModule> CreateNativeModules(ReactContext reactContext);
+  };
+}

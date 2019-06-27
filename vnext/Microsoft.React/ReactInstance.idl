@@ -1,0 +1,20 @@
+import "INativeModule.idl";
+
+namespace Microsoft.React
+{
+	interface IReactInstance
+	{
+		IIterable<INativeModule> NativeModules { get; };
+		void InvokeFunction(String moduleName, String method, Windows.Data.Json.JsonArray arguments, String tracingName);
+		void InvokeCallback(Int32 callbackId, Windows.Data.Json.JsonArray arguments);
+	};
+}
+
+namespace Microsoft.React.Bridge
+{
+    [webhosthidden]
+  	[default_interface]
+    runtimeclass ReactInstance : Microsoft.React.IReactInstance
+    {
+    }
+}

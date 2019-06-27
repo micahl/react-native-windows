@@ -1,0 +1,16 @@
+
+namespace Microsoft.React
+{
+  delegate void MethodDelegate(String args);
+  delegate void MethodCallback(Windows.Foundation.Collections.IVectorView<String> callback);
+  delegate void MethodWithCallbackDelegate(String args, MethodCallback callback);
+
+  [webhosthidden]
+  interface INativeModule
+  {
+    String Name{ get; };
+    Windows.Foundation.Collections.IMapView<String, String> Constants{ get; };
+    Windows.Foundation.Collections.IMapView<String, MethodDelegate> Methods{ get; };
+    Windows.Foundation.Collections.IMapView<String, MethodWithCallbackDelegate> MethodsWithCallback{ get; };
+  };
+}
