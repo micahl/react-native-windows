@@ -119,11 +119,10 @@ namespace winrt::Microsoft::ReactNative::implementation
 
         ReactContext context = ReactContext{ nullptr };
 
-        // TODO: Register any modules
-        for (auto& package : m_packages)
+        for (auto package : m_packages)
         {
           auto modules = package.CreateNativeModules(context);
-          for (auto& module : modules)
+          for (auto module : modules)
           {
             m_modulesProvider->RegisterModule(module);
           }
@@ -133,6 +132,8 @@ namespace winrt::Microsoft::ReactNative::implementation
       if (m_viewManagersProvider == nullptr)
       {
         m_viewManagersProvider = std::make_shared<ViewManagersProvider>();
+
+        // TODO: Register any modules
       }
 
       m_reactInstanceCreator = std::make_shared<ReactInstanceCreator>(

@@ -2,7 +2,6 @@
 #include "NativeModulesProvider.h"
 #include "ABIModule.h"
 #include <ReactUWP/ReactUwp.h>
-//#include <Threading/UIMessageQueueThread.h>
 
 #include <folly/json.h>
 #include <windows.foundation.h>
@@ -22,9 +21,9 @@ std::vector<facebook::react::NativeModuleDescription> NativeModulesProvider::Get
   {
     modules.emplace_back(
       winrt::to_string(module.Name()),
-      [module, queueThread]()
+      [module = std::move(module), queueThread]()
     {
-      return std::make_unique<ABIModule>(module);
+      return std::make_unique<ABIModule>(std::move(module));
     },
       queueThread
       );
