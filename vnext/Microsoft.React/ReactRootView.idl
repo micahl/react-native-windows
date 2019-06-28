@@ -1,4 +1,4 @@
-namespace Microsoft.React
+namespace Microsoft.ReactNative
 {
     [default_interface]
     [webhosthidden]

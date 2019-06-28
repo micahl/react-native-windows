@@ -7,13 +7,13 @@
 #include <ReactUWP/IXamlRootView.h>
 #include <ReactUWP/ReactUwp.h>
 #include <ReactUWP/IReactInstance.h>
-//#include <winrt/microsoft.react.h>
+//#include <winrt/microsoft.reactnative.h>
 
 #include "ReactInstanceManager.h"
 #include "ReactNativeHost.h"
 #include "ReactApplication.h"
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	//std::shared_ptr<react::uwp::IXamlRootView>
 	//StartReactApplication(
@@ -27,9 +27,9 @@ namespace winrt::Microsoft::React::implementation
     {
         ReactRootView() = default;
 
-		void OnCreate(winrt::Microsoft::React::ReactNativeHost const& host);
+		void OnCreate(winrt::Microsoft::ReactNative::ReactNativeHost const& host);
 		void StartReactApplication(
-			winrt::Microsoft::React::ReactInstanceManager const& instanceManager,
+			winrt::Microsoft::ReactNative::ReactInstanceManager const& instanceManager,
 			winrt::hstring componentName,
 			folly::dynamic initialProps);
 
@@ -37,10 +37,10 @@ namespace winrt::Microsoft::React::implementation
 		std::shared_ptr<react::uwp::IXamlRootView> m_xamlView;
 		winrt::hstring m_moduleName{};
 		folly::dynamic m_initialProps{};
-		winrt::Microsoft::React::ReactInstanceManager m_reactInstanceManager{};
+		winrt::Microsoft::ReactNative::ReactInstanceManager m_reactInstanceManager{};
 
 		static void OnBackRequested(
-			winrt::Microsoft::React::ReactNativeHost const& host,
+			winrt::Microsoft::ReactNative::ReactNativeHost const& host,
 			IInspectable sender,
 			winrt::Windows::UI::Core::BackRequestedEventArgs e);
 
@@ -51,7 +51,7 @@ namespace winrt::Microsoft::React::implementation
     };
 }
 
-namespace winrt::Microsoft::React::factory_implementation
+namespace winrt::Microsoft::ReactNative::factory_implementation
 {
     struct ReactRootView : ReactRootViewT<ReactRootView, implementation::ReactRootView>
     {

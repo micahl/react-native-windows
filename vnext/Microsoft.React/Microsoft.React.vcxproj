@@ -6,8 +6,8 @@
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{f7d32bd0-2749-483e-9a0d-1635ef7e3136}</ProjectGuid>
-    <ProjectName>Microsoft.React</ProjectName>
-    <RootNamespace>Microsoft.React</RootNamespace>
+    <ProjectName>Microsoft.ReactNative</ProjectName>
+    <RootNamespace>Microsoft.ReactNative</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>

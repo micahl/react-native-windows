@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "ReactInstanceManagerBuilder.h"
 
-using namespace winrt::Microsoft::React;
+using namespace winrt::Microsoft::ReactNative;
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
-	winrt::Microsoft::React::ReactInstanceManager ReactInstanceManagerBuilder::Build()
+	winrt::Microsoft::ReactNative::ReactInstanceManager ReactInstanceManagerBuilder::Build()
 	{
 		if (!m_isLifecycleStateSet)
 		{

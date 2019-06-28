@@ -1,12 +1,12 @@
 #pragma once
 
 #include "ReactSupport.h"
-#include <winrt\Microsoft.React.h>
+#include <winrt\Microsoft.ReactNative.h>
 
 class ABIModule : public facebook::xplat::module::CxxModule
 {
 public:
-  ABIModule(winrt::Microsoft::React::INativeModule const& module)
+  ABIModule(winrt::Microsoft::ReactNative::INativeModule const& module)
     : m_module(module)
   {
     assert(module != nullptr);
@@ -18,6 +18,6 @@ public:
   std::vector<facebook::xplat::module::CxxModule::Method> getMethods() override;
 
 private:
-  winrt::Microsoft::React::INativeModule m_module{ nullptr };
+  winrt::Microsoft::ReactNative::INativeModule m_module{ nullptr };
 };
 

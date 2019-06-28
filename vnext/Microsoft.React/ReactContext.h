@@ -3,17 +3,17 @@
 #include "ReactContext.g.h"
 #include <winrt/Windows.Data.Json.h>
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
     struct ReactContext : ReactContextT<ReactContext>
     {
         ReactContext() = default;
 
-        Microsoft::React::IReactInstance ReactInstance();
+        Microsoft::ReactNative::IReactInstance ReactInstance();
     };
 }
 
-//namespace winrt::Microsoft::React::factory_implementation
+//namespace winrt::Microsoft::ReactNative::factory_implementation
 //{
 //    struct ReactContext : ReactContextT<ReactContext, implementation::ReactContext>
 //    {

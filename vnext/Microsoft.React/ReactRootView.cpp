@@ -7,15 +7,15 @@
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
-	void ReactRootView::OnCreate(winrt::Microsoft::React::ReactNativeHost const& host)
+	void ReactRootView::OnCreate(winrt::Microsoft::ReactNative::ReactNativeHost const& host)
 	{
 		auto resources = Windows::UI::Xaml::Application::Current().Resources();
 		auto brush = resources.Lookup(winrt::box_value(L"ApplicationPageBackgroundThemeBrush")).as<Windows::UI::Xaml::Media::SolidColorBrush>();
 		this->Background(brush);
 
-		// TODO: 
+		// TODO:
 		//if (DispatcherHelpers.IsOnDispatcher())
 		//{
 		//	SystemNavigationManager.GetForCurrentView().BackRequested += (sender, e) = > OnBackRequested(host, sender, e);
@@ -24,7 +24,7 @@ namespace winrt::Microsoft::React::implementation
 	}
 
 	void ReactRootView::OnBackRequested(
-		winrt::Microsoft::React::ReactNativeHost const& host,
+		winrt::Microsoft::ReactNative::ReactNativeHost const& host,
 		IInspectable sender,
 		winrt::Windows::UI::Core::BackRequestedEventArgs e)
 	{
@@ -37,7 +37,7 @@ namespace winrt::Microsoft::React::implementation
 	}
 
 	void ReactRootView::StartReactApplication(
-		winrt::Microsoft::React::ReactInstanceManager const& instanceManager,
+		winrt::Microsoft::ReactNative::ReactInstanceManager const& instanceManager,
 		winrt::hstring componentName,
 		folly::dynamic initialProps)
 	{

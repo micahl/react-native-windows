@@ -3,7 +3,7 @@ import "INativeModule.idl";
 import "ReactInstanceManager.idl";
 import "ReactRootView.idl";
 
-namespace Microsoft.React
+namespace Microsoft.ReactNative
 {
   [webhosthidden]
   delegate void OnResumeAction();

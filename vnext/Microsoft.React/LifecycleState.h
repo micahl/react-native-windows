@@ -1,9 +1,9 @@
 #pragma once
 
-namespace winrt::Microsoft::React
+namespace winrt::Microsoft::ReactNative
 {
 	/// <summary>
-	/// An enumeration to signify the current lifecycle state for a 
+	/// An enumeration to signify the current lifecycle state for a
 	/// <see cref="ReactInstanceManager"/>.
 	/// </summary>
 	enum struct LifecycleState

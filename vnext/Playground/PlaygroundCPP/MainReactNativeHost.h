@@ -3,7 +3,7 @@
 #include "MainReactNativeHost.g.h"
 
 using namespace winrt;
-using namespace Microsoft::React;
+using namespace Microsoft::ReactNative;
 using namespace Windows::Foundation::Collections;
 
 namespace winrt::Playground::implementation

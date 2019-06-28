@@ -14,14 +14,14 @@ using namespace winrt;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	ReactNativeHost::ReactNativeHost()
 	{
 		Init();
 	}
 
-	winrt::Microsoft::React::ReactInstanceManager ReactNativeHost::ReactInstanceManager()
+	winrt::Microsoft::ReactNative::ReactInstanceManager ReactNativeHost::ReactInstanceManager()
 	{
 		if (m_reactInstanceManager == nullptr)
 		{
@@ -73,7 +73,7 @@ namespace winrt::Microsoft::React::implementation
 		}
 	}
 
-	void ReactNativeHost::OnResume(Microsoft::React::OnResumeAction const& action)
+	void ReactNativeHost::OnResume(Microsoft::ReactNative::OnResumeAction const& action)
 	{
 		if (HasInstance())
 		{
@@ -105,7 +105,7 @@ namespace winrt::Microsoft::React::implementation
 #endif
 	}
 
-	Windows::Foundation::Collections::IVectorView<Microsoft::React::IReactPackage> ReactNativeHost::Packages()
+	Windows::Foundation::Collections::IVectorView<Microsoft::ReactNative::IReactPackage> ReactNativeHost::Packages()
 	{
 		throw winrt::hresult_not_implemented(L"Must implement ReactNativeHost.Packages");
 	}
@@ -114,13 +114,13 @@ namespace winrt::Microsoft::React::implementation
 	{
 #if _DEBUG
 		facebook::react::InitializeLogging([](facebook::react::RCTLogLevel /*logLevel*/, const char* message) {
-			std::string str = std::string("React:") + message;
+			std::string str = std::string("ReactNative:") + message;
 			OutputDebugStringA(str.c_str());
 			});
 #endif
 	}
 
-	winrt::Microsoft::React::ReactInstanceManager ReactNativeHost::CreateReactInstanceManager()
+	winrt::Microsoft::ReactNative::ReactInstanceManager ReactNativeHost::CreateReactInstanceManager()
 	{
 		auto builder = ReactInstanceManagerBuilder();
 		builder.UseDeveloperSupport(UseDeveloperSupport());

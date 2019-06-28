@@ -15,9 +15,9 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 
-using namespace winrt::Microsoft::React;
+using namespace winrt::Microsoft::ReactNative;
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	ReactApplication::ReactApplication() : m_delegate(CreateReactApplicationDelegate())
 	{
@@ -35,7 +35,7 @@ namespace winrt::Microsoft::React::implementation
 #endif
 	}
 
-	winrt::Microsoft::React::ReactNativeHost ReactApplication::Host()
+	winrt::Microsoft::ReactNative::ReactNativeHost ReactApplication::Host()
 	{
 		if (m_host == nullptr)
 		{
@@ -45,7 +45,7 @@ namespace winrt::Microsoft::React::implementation
 		return m_host;
 	}
 
-	winrt::Microsoft::React::ReactNativeHost ReactApplication::HostCore()
+	winrt::Microsoft::ReactNative::ReactNativeHost ReactApplication::HostCore()
 	{
 		throw winrt::hresult_not_implemented(L"ReactApplication.HostCore is not implemented");
 	}

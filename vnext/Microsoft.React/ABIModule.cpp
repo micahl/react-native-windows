@@ -68,7 +68,7 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
     auto pair = methodsIter.Current();
 
     winrt::hstring key;
-    winrt::Microsoft::React::MethodDelegate value;
+    winrt::Microsoft::ReactNative::MethodDelegate value;
     key = pair.Key();
     value = pair.Value();
 
@@ -97,7 +97,7 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
     auto pair = methodsWithCallBackIter.Current();
 
     winrt::hstring key;
-    winrt::Microsoft::React::MethodWithCallbackDelegate value;
+    winrt::Microsoft::ReactNative::MethodWithCallbackDelegate value;
     key = pair.Key();
     value = pair.Value();
 
@@ -108,7 +108,7 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
 
       winrt::hstring para = winrt::to_hstring(str);
 
-      auto callback = winrt::Microsoft::React::MethodCallback(
+      auto callback = winrt::Microsoft::ReactNative::MethodCallback(
         [cb](winrt::Windows::Foundation::Collections::IVectorView<winrt::hstring> argVectorView)
       {
         std::vector<folly::dynamic> args;

@@ -1,7 +1,7 @@
 import "ReactNativeHost.idl";
 import "ReactApplicationDelegate.idl";
 
-namespace Microsoft.React
+namespace Microsoft.ReactNative
 {
 	interface IReactApplication
 	{

@@ -9,7 +9,7 @@ namespace winrt::Playground::implementation
     {
         App();
 
-		winrt::Microsoft::React::ReactNativeHost HostCore()
+		winrt::Microsoft::ReactNative::ReactNativeHost HostCore()
 		{
 			if (m_host == nullptr)
 			{

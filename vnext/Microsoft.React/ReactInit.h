@@ -14,7 +14,7 @@ namespace react {
 	}
 }
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	void InitReactNative();
 

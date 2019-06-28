@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "ReactInstance.h"
 #if __has_include("Bridge.ReactInstance.g.cpp")
 #include "Bridge.ReactInstance.g.cpp"
@@ -7,7 +7,7 @@
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-namespace winrt::Microsoft::React::Bridge::implementation
+namespace winrt::Microsoft::ReactNative::Bridge::implementation
 {
 	void ReactInstance::InvokeFunction(hstring moduleName, hstring method, Windows::Data::Json::JsonArray arguments, hstring tracingName)
 	{

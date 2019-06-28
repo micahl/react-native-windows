@@ -33,7 +33,7 @@ std::vector<facebook::react::NativeModuleDescription> NativeModulesProvider::Get
   return modules;
 }
 
-void NativeModulesProvider::RegisterModule(winrt::Microsoft::React::INativeModule const& module)
+void NativeModulesProvider::RegisterModule(winrt::Microsoft::ReactNative::INativeModule const& module)
 {
   m_modules.push_back(module);
 }

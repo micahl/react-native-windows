@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "ReactContext.h"
 #if __has_include("ReactContext.g.cpp")
 #include "ReactContext.g.cpp"
@@ -7,9 +7,9 @@
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
-	Microsoft::React::IReactInstance ReactContext::ReactInstance()
+	Microsoft::ReactNative::IReactInstance ReactContext::ReactInstance()
 	{
 		throw winrt::hresult_not_implemented(L"ReactContext.ReactInstance.get");
 	}

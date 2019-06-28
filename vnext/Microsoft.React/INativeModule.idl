@@ -1,5 +1,5 @@
 
-namespace Microsoft.React
+namespace Microsoft.ReactNative
 {
   delegate void MethodDelegate(String args);
   delegate void MethodCallback(Windows.Foundation.Collections.IVectorView<String> callback);

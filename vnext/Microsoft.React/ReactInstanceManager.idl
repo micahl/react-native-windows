@@ -1,6 +1,6 @@
 import "ReactNativeHost.idl";
 
-namespace Microsoft.React
+namespace Microsoft.ReactNative
 {
     [webhosthidden]
     runtimeclass ReactInstanceManager

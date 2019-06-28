@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "ReactApplication.h"
 #include "ReactApplicationDelegate.g.h"
@@ -7,7 +7,7 @@ using namespace winrt::Windows::UI::Xaml;
 using namespace winrt::Windows::ApplicationModel;
 using namespace winrt::Windows::ApplicationModel::Activation;
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
     struct ReactApplicationDelegate : ReactApplicationDelegateT<ReactApplicationDelegate>
     {
@@ -19,7 +19,7 @@ namespace winrt::Microsoft::React::implementation
 
 	private:
 		Application m_application{ nullptr };
-		winrt::Microsoft::React::IReactApplication m_reactApplication{ nullptr };
+		winrt::Microsoft::ReactNative::IReactApplication m_reactApplication{ nullptr };
 
 		void OnResuming(IInspectable sender, IInspectable args);
 		void OnSuspending(IInspectable sender, IInspectable args);
@@ -28,7 +28,7 @@ namespace winrt::Microsoft::React::implementation
     };
 }
 
-namespace winrt::Microsoft::React::factory_implementation
+namespace winrt::Microsoft::ReactNative::factory_implementation
 {
     struct ReactApplicationDelegate : ReactApplicationDelegateT<ReactApplicationDelegate, implementation::ReactApplicationDelegate>
     {

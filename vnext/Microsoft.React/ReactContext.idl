@@ -1,7 +1,7 @@
 import "ReactInstance.idl";
 import "INativeModule.idl";
 
-namespace Microsoft.React
+namespace Microsoft.ReactNative
 {
     [webhosthidden]
     runtimeclass ReactContext

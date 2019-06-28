@@ -1,6 +1,6 @@
 import "INativeModule.idl";
 
-namespace Microsoft.React
+namespace Microsoft.ReactNative
 {
 	interface IReactInstance
 	{
@@ -10,11 +10,11 @@ namespace Microsoft.React
 	};
 }
 
-namespace Microsoft.React.Bridge
+namespace Microsoft.ReactNative.Bridge
 {
     [webhosthidden]
   	[default_interface]
-    runtimeclass ReactInstance : Microsoft.React.IReactInstance
+    runtimeclass ReactInstance : Microsoft.ReactNative.IReactInstance
     {
     }
 }

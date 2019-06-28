@@ -11,9 +11,9 @@ using namespace Windows::UI::Xaml;
 
 namespace {
 
-	static void ApplyArguments(winrt::Microsoft::React::ReactNativeHost host, std::wstring arguments)
+	static void ApplyArguments(winrt::Microsoft::ReactNative::ReactNativeHost host, std::wstring arguments)
 	{
-    //winrt::Microsoft::React::implementation::ReactNativeHost* h = winrt::get_self<winrt::Microsoft::React::implementation::ReactNativeHost>(host);
+    //winrt::Microsoft::ReactNative::implementation::ReactNativeHost* h = winrt::get_self<winrt::Microsoft::ReactNative::implementation::ReactNativeHost>(host);
 		if (!arguments.empty() && host.HasInstance())
 		{
 			// TODO: check for 'remoteDebugging'.  Return if not found.  Otherwise, validate a value is provided and then parse it to set
@@ -22,7 +22,7 @@ namespace {
 	}
 }
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	ReactApplicationDelegate::ReactApplicationDelegate(Application const& application) :
 		m_application(application)
@@ -67,7 +67,7 @@ namespace winrt::Microsoft::React::implementation
 		}
 	}
 
-	// Create the root view for the React app
+	// Create the root view for the ReactNative app
 	UIElement ReactApplicationDelegate::OnCreate(hstring const& arguments)
 	{
 		auto host = m_reactApplication.Host();

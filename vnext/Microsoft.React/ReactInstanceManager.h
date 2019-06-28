@@ -4,9 +4,9 @@
 #include "LifecycleState.h"
 #include <ReactUWP/ReactUwp.h>
 #include <ReactUWP/IReactInstance.h>
-#include <winrt\microsoft.react.h>
+#include <winrt\microsoft.reactnative.h>
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager>
 	{
@@ -14,7 +14,7 @@ namespace winrt::Microsoft::React::implementation
 		ReactInstanceManager(
 			std::string jsBundleFile,
 			std::string jsMainModuleName,
-			Windows::Foundation::Collections::IVectorView<winrt::Microsoft::React::IReactPackage> &packages,
+			Windows::Foundation::Collections::IVectorView<winrt::Microsoft::ReactNative::IReactPackage> &packages,
 			bool useDeveloperSupport,
 			LifecycleState initialLifecycleState);
 
@@ -24,14 +24,14 @@ namespace winrt::Microsoft::React::implementation
 		void OnSuspend();
 		void OnEnteredBackground();
 		void OnLeavingBackground();
-		void OnResume(Microsoft::React::OnResumeAction const& action);
+		void OnResume(Microsoft::ReactNative::OnResumeAction const& action);
 
 		void OnBackPressed();
 
 	private:
 		std::string m_jsBundleFile{};
 		std::string m_jsMainModuleName{};
-		Windows::Foundation::Collections::IVectorView<winrt::Microsoft::React::IReactPackage> m_packages;
+		Windows::Foundation::Collections::IVectorView<winrt::Microsoft::ReactNative::IReactPackage> m_packages;
 		bool m_useDeveloperSupport;
 		std::shared_ptr<NativeModulesProvider> m_modulesProvider{ nullptr };
 		std::shared_ptr<ViewManagersProvider> m_viewManagersProvider{ nullptr };
@@ -44,7 +44,7 @@ namespace winrt::Microsoft::React::implementation
 	};
 }
 
-namespace winrt::Microsoft::React::factory_implementation
+namespace winrt::Microsoft::ReactNative::factory_implementation
 {
 	struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager, implementation::ReactInstanceManager>
 	{

@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.React;
+using Microsoft.ReactNative;
 
 namespace Playground
 {
@@ -45,12 +45,12 @@ namespace Playground
     {
       get
       {
-        return new[] { new AppModulePackage() };
+        return new[] { new AppModulesPackage() };
       }
     }
   }
 
-  sealed class AppModulePackage : IReactPackage
+  sealed class AppModulesPackage : IReactPackage
   {
     public IReadOnlyList<INativeModule> CreateNativeModules(ReactContext reactContext)
     {
@@ -58,7 +58,7 @@ namespace Playground
     }
   }
 
-  public class SampleModule : Microsoft.React.INativeModule
+  public class SampleModule : Microsoft.ReactNative.INativeModule
   {
     Dictionary<string, string> _constants;
     Dictionary<string, MethodDelegate> m_delegates = new Dictionary<string, MethodDelegate>();

@@ -3,9 +3,9 @@
 #include "LifecycleState.h"
 #include "ReactInstanceManager.h"
 #include <ReactUWP\IReactInstance.h>
-#include <winrt\microsoft.react.h>
+#include <winrt\microsoft.reactnative.h>
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	class ReactInstanceManagerBuilder
 	{
@@ -16,12 +16,12 @@ namespace winrt::Microsoft::React::implementation
 		void UseDeveloperSupport(bool useDevSupport) { m_useDeveloperSupport = useDevSupport; };
 		void InitialLifecycleState(LifecycleState state) { m_initialLifecycleState = state; m_isLifecycleStateSet = TRUE; };
 
-		void Packages(Windows::Foundation::Collections::IVectorView<winrt::Microsoft::React::IReactPackage> packages) { m_packages = packages; }
+		void Packages(Windows::Foundation::Collections::IVectorView<winrt::Microsoft::ReactNative::IReactPackage> packages) { m_packages = packages; }
 
-		winrt::Microsoft::React::ReactInstanceManager Build();
+		winrt::Microsoft::ReactNative::ReactInstanceManager Build();
 
 	private:
-		Windows::Foundation::Collections::IVectorView<winrt::Microsoft::React::IReactPackage> m_packages;
+		Windows::Foundation::Collections::IVectorView<winrt::Microsoft::ReactNative::IReactPackage> m_packages;
 		std::wstring m_jsBundleFile{};
 		std::wstring m_jsMainModuleName{};
 		bool m_useDeveloperSupport{ false };

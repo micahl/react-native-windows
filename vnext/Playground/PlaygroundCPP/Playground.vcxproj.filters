@@ -4,9 +4,6 @@
     <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainPage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <Midl Include="App.idl" />
     <Midl Include="MainPage.idl" />
     <Midl Include="MainReactNativeHost.idl" />

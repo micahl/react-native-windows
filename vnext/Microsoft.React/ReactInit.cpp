@@ -11,16 +11,16 @@
 using namespace winrt;
 using namespace winrt::Windows::UI::Xaml;
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	/*-------------------------------------------------------------------------------
-		winrt::Microsoft::React::implementation::InitReactNative
+		winrt::Microsoft::ReactNative::implementation::InitReactNative
 	-------------------------------------------------------------------------------*/
 	void InitReactNative()
 	{
 #if _DEBUG
 		facebook::react::InitializeLogging([](facebook::react::RCTLogLevel /*logLevel*/, const char* message) {
-			std::string str = std::string("React:") + message;
+			std::string str = std::string("ReactNative:") + message;
 			OutputDebugStringA(str.c_str());
 		});
 #endif

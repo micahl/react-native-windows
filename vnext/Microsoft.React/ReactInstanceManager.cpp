@@ -11,12 +11,12 @@
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
   ReactInstanceManager::ReactInstanceManager(
     std::string jsBundleFile,
     std::string jsMainModuleName,
-    Windows::Foundation::Collections::IVectorView<winrt::Microsoft::React::IReactPackage>& packages,
+    Windows::Foundation::Collections::IVectorView<winrt::Microsoft::ReactNative::IReactPackage>& packages,
     bool useDeveloperSupport,
     LifecycleState initialLifecycleState)
     : m_jsBundleFile(jsBundleFile), m_jsMainModuleName(jsMainModuleName), m_packages(packages), m_useDeveloperSupport(useDeveloperSupport)
@@ -66,7 +66,7 @@ namespace winrt::Microsoft::React::implementation
   }
 
   // Used when the application resumes to reset the back button handling in JavaScript.
-  void ReactInstanceManager::OnResume(Microsoft::React::OnResumeAction const& action)
+  void ReactInstanceManager::OnResume(Microsoft::ReactNative::OnResumeAction const& action)
   {
     //winrt::fire_and_forget action();
     //action();

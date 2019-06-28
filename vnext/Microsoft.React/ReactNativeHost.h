@@ -8,7 +8,7 @@
 #include <ReactUWP/ReactUwp.h>
 #include <ReactUWP/IReactInstance.h>
 
-namespace winrt::Microsoft::React::implementation
+namespace winrt::Microsoft::ReactNative::implementation
 {
 	struct ReactNativeHost : ReactNativeHostT<ReactNativeHost>
 	{
@@ -16,7 +16,7 @@ namespace winrt::Microsoft::React::implementation
 
 		UIElement OnCreate();
 
-		winrt::Microsoft::React::ReactInstanceManager ReactInstanceManager();
+		winrt::Microsoft::ReactNative::ReactInstanceManager ReactInstanceManager();
 
 		void OnSuspend();
 		void OnEnteredBackground();
@@ -27,7 +27,7 @@ namespace winrt::Microsoft::React::implementation
 		virtual hstring JavaScriptMainModuleName();
 		virtual hstring JavaScriptBundleFile();
 		virtual bool UseDeveloperSupport();
-		virtual Windows::Foundation::Collections::IVectorView<Microsoft::React::IReactPackage> Packages();
+		virtual Windows::Foundation::Collections::IVectorView<Microsoft::ReactNative::IReactPackage> Packages();
 
 		bool HasInstance() { return m_reactInstanceManager != nullptr; }
 
@@ -36,22 +36,22 @@ namespace winrt::Microsoft::React::implementation
 		hstring get_JavaScriptBundleFile() { return overridable().JavaScriptBundleFile(); }
 		bool get_UseDeveloperSupport() { return overridable().UseDeveloperSupport(); }
 
-		winrt::Windows::Foundation::Collections::IVectorView<winrt::Microsoft::React::IReactPackage> get_Packages() { return overridable().Packages(); }
+		winrt::Windows::Foundation::Collections::IVectorView<winrt::Microsoft::ReactNative::IReactPackage> get_Packages() { return overridable().Packages(); }
 
 	private:
-		winrt::Microsoft::React::ReactInstanceManager m_reactInstanceManager{ nullptr };
+		winrt::Microsoft::ReactNative::ReactInstanceManager m_reactInstanceManager{ nullptr };
 		winrt::hstring m_mainComponentName{};
 		winrt::hstring m_javascriptMainModuleName{};
 
 		std::shared_ptr<ReactRootView> m_reactRootView{ nullptr };
 
 		void Init();
-		winrt::Microsoft::React::ReactInstanceManager CreateReactInstanceManager();
+		winrt::Microsoft::ReactNative::ReactInstanceManager CreateReactInstanceManager();
 		std::shared_ptr<ReactRootView> CreateRootView();
 	};
 }
 
-namespace winrt::Microsoft::React::factory_implementation
+namespace winrt::Microsoft::ReactNative::factory_implementation
 {
 	struct ReactNativeHost : ReactNativeHostT<ReactNativeHost, implementation::ReactNativeHost>
 	{

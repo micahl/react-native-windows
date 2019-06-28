@@ -1,6 +1,6 @@
 import "ReactApplication.idl";
 
-namespace Microsoft.React
+namespace Microsoft.ReactNative
 {
     [webhosthidden]
 	unsealed runtimeclass ReactApplicationDelegate
