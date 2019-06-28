@@ -112,6 +112,10 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AppModulesPackage.h">
+      <DependentUpon>AppModulesPackage.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="MainReactNativeHost.h">
       <DependentUpon>MainReactNativeHost.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -119,6 +123,10 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="SampleModule.h">
+      <DependentUpon>SampleModule.idl</DependentUpon>
+      <SubType>Code</SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +151,10 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AppModulesPackage.cpp">
+      <DependentUpon>AppModulesPackage.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="MainReactNativeHost.cpp">
       <DependentUpon>MainReactNativeHost.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -154,12 +166,22 @@
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="SampleModule.cpp">
+      <DependentUpon>SampleModule.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
+    <Midl Include="AppModulesPackage.idl">
+      <SubType>Designer</SubType>
+    </Midl>
     <Midl Include="MainReactNativeHost.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="SampleModule.idl">
       <SubType>Designer</SubType>
     </Midl>
   </ItemGroup>
