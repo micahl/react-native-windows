@@ -6,7 +6,7 @@
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{93f7572c-64b9-4096-9ef9-6ba0ede2b50d}</ProjectGuid>
-    <ProjectName>Playground</ProjectName>
+    <ProjectName>PlaygroundCPP</ProjectName>
     <RootNamespace>Playground</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>

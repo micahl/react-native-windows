@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.539
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "PlaygroundCS\Playground.csproj", "{09F4E6C1-2D12-4059-AA96-0B190861FD6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaygroundCS", "PlaygroundCS\PlaygroundCS.csproj", "{09F4E6C1-2D12-4059-AA96-0B190861FD6A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Playground", "PlaygroundCPP\Playground.vcxproj", "{93F7572C-64B9-4096-9EF9-6BA0EDE2B50D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlaygroundCPP", "PlaygroundCPP\Playground.vcxproj", "{93F7572C-64B9-4096-9EF9-6BA0EDE2B50D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Folly", "..\Folly\Folly.vcxproj", "{A990658C-CE31-4BCC-976F-0FC6B1AF693D}"
 EndProject
@@ -17,7 +17,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReactWindowsCore", "..\Reac
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chakra", "..\Chakra\Chakra.vcxitems", "{C38970C0-5FBF-4D69-90D8-CBAC225AE895}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Microsoft.React", "..\Microsoft.React\Microsoft.React.vcxproj", "{F7D32BD0-2749-483E-9A0D-1635EF7E3136}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Microsoft.ReactNative", "..\Microsoft.React\Microsoft.React.vcxproj", "{F7D32BD0-2749-483E-9A0D-1635EF7E3136}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
