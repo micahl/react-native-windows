@@ -2,8 +2,9 @@
 // Licensed under the MIT License.
 
 #include "pch.h"
-#include "Helpers.h"
+
 #include <Modules/NativeUIManager.h>
+#include "Helpers.h"
 
 namespace react {
 namespace uwp {
@@ -31,12 +32,6 @@ ReactId getViewId(
   }
   return reactId;
 };
-
-void toUpperInplace(string &str) {
-  std::for_each(str.begin(), str.end(), [](char &c) {
-    c = static_cast<char>(std::toupper(c));
-  });
-}
 
 } // namespace uwp
 }; // namespace react
