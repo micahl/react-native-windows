@@ -133,7 +133,10 @@ namespace winrt::Microsoft::ReactNative::implementation
       {
         m_viewManagersProvider = std::make_shared<ViewManagersProvider>();
 
-        // TODO: Register any modules
+        // TODO: Register default modules
+        // The registration that currently happens in the moduleregistry.cpp should
+        // happen here if we convert all modules to go through the ABI rather than
+        // directly against facebook's types.
       }
 
       m_reactInstanceCreator = std::make_shared<ReactInstanceCreator>(
