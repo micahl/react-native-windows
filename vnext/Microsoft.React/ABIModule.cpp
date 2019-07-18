@@ -97,19 +97,26 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
     auto pair = methodsWithCallBackIter.Current();
 
     winrt::hstring key;
-    winrt::Microsoft::ReactNative::MethodWithCallbackDelegate value;
+    winrt::Microsoft::ReactNative::MethodWithCallbackDelegate abiCallback;
     key = pair.Key();
-    value = pair.Value();
+    abiCallback = pair.Value();
 
     ret.push_back(
-      facebook::xplat::module::CxxModule::Method(winrt::to_string(key), [this, value](folly::dynamic args, Callback cb)
+      facebook::xplat::module::CxxModule::Method(
+        winrt::to_string(key),
+        [this, abiCallback = std::move(abiCallback)](folly::dynamic args, Callback cbSuccess, Callback cbFail)
     {
-      std::string str = folly::toJson(args);
-
-      winrt::hstring para = winrt::to_hstring(str);
+      // TODO: When to call the cbFail?  It's included in the Method
+      // construction above so that we use the right template and have
+      // everything work correctly across the bridge.  If not included then
+      // things don't appear to get set up correctly.  I've seen the result
+      // be that it causes the callback ID to end up being the value of a
+      // parameter.
+      std::string jsonArgs = folly::toJson(args);
+      winrt::hstring abiParameter = winrt::to_hstring(jsonArgs);
 
       auto callback = winrt::Microsoft::ReactNative::MethodCallback(
-        [cb](winrt::Windows::Foundation::Collections::IVectorView<winrt::hstring> argVectorView)
+        [cbSuccess = std::move(cbSuccess)](winrt::Windows::Foundation::Collections::IVectorView<winrt::hstring> argVectorView)
       {
         std::vector<folly::dynamic> args;
 
@@ -128,10 +135,10 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
           }
         }
 
-        cb(args);
+        cbSuccess(args);
       });
 
-      value(para, callback);
+      abiCallback(abiParameter, callback);
     }));
 
     methodsWithCallBackIter.MoveNext();

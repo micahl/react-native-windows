@@ -16,7 +16,11 @@ import { NativeModules } from 'react-native';
 
 class Playground extends Component {
     _onPressHandler() {
-        console.log(NativeModules.SampleModule.method2(0));
+        // Demonstrate calling a method that returns a result async via a Promise
+        var promise = NativeModules.SampleModule.method2(42);
+
+        // log the result
+        promise.then(function(result) { console.log(result); });
     }
 
   render() {
