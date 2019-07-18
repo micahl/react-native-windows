@@ -7,10 +7,8 @@
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-namespace winrt::Microsoft::ReactNative::implementation
-{
-	Microsoft::ReactNative::IReactInstance ReactContext::ReactInstance()
-	{
-		throw winrt::hresult_not_implemented(L"ReactContext.ReactInstance.get");
-	}
+namespace winrt::Microsoft::ReactNative::implementation {
+Microsoft::ReactNative::IReactInstance ReactContext::ReactInstance() {
+  throw winrt::hresult_not_implemented(L"ReactContext.ReactInstance.get");
 }
+} // namespace winrt::Microsoft::ReactNative::implementation

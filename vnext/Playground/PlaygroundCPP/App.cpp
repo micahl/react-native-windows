@@ -13,14 +13,15 @@ using namespace Playground;
 using namespace Playground::implementation;
 
 /// <summary>
-/// Initializes the singleton application object.  This is the first line of authored code
-/// executed, and as such is the logical equivalent of main() or WinMain().
+/// Initializes the singleton application object.  This is the first line of
+/// authored code executed, and as such is the logical equivalent of main() or
+/// WinMain().
 /// </summary>
-App::App()
-{
-    InitializeComponent();
+App::App() {
+  InitializeComponent();
 
-	// This works around a cpp/winrt bug with composable/aggregable types tracked by 22116519
-	AddRef();
-	m_inner.as<::IUnknown>()->Release();
+  // This works around a cpp/winrt bug with composable/aggregable types tracked
+  // by 22116519
+  AddRef();
+  m_inner.as<::IUnknown>()->Release();
 }

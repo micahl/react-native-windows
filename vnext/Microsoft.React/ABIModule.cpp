@@ -1,22 +1,20 @@
 #include "pch.h"
 #include "ABIModule.h"
-#include "NativeModulesProvider.h"
 #include <ReactUWP/ReactUwp.h>
+#include "NativeModulesProvider.h"
 
 #include <folly/json.h>
 #include <windows.foundation.h>
-#include "winrt\Windows.Foundation.h"
 #include "winrt\Windows.Foundation.Collections.h"
+#include "winrt\Windows.Foundation.h"
 
-std::string ABIModule::getName()
-{
+std::string ABIModule::getName() {
   auto name = m_module.Name();
 
   return winrt::to_string(name);
 }
 
-std::map<std::string, folly::dynamic> ABIModule::getConstants()
-{
+std::map<std::string, folly::dynamic> ABIModule::getConstants() {
   using namespace winrt::Windows::Foundation;
   using namespace winrt::Windows::Foundation::Collections;
 
@@ -26,8 +24,7 @@ std::map<std::string, folly::dynamic> ABIModule::getConstants()
   std::map<std::string, folly::dynamic> ret;
   boolean hasCurrent;
 
-  do
-  {
+  do {
     hasCurrent = constantsIter.HasCurrent();
 
     if (!hasCurrent)
@@ -39,15 +36,16 @@ std::map<std::string, folly::dynamic> ABIModule::getConstants()
     key = pair.Key();
     value = pair.Value();
 
-    ret.emplace(winrt::to_string(key), folly::parseJson(winrt::to_string(value)));
+    ret.emplace(
+        winrt::to_string(key), folly::parseJson(winrt::to_string(value)));
     constantsIter.MoveNext();
   } while (hasCurrent);
 
   return ret;
 }
 
-std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
-{
+std::vector<facebook::xplat::module::CxxModule::Method>
+ABIModule::getMethods() {
   using namespace ABI::Windows::Foundation;
   using namespace ABI::Windows::Foundation::Collections;
 
@@ -58,8 +56,7 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
   auto methodsMapView = m_module.Methods();
   auto methodsIter = methodsMapView.First();
 
-  do
-  {
+  do {
     hasCurrent = methodsIter.HasCurrent();
 
     if (!hasCurrent)
@@ -72,13 +69,13 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
     key = pair.Key();
     value = pair.Value();
 
-    ret.push_back(facebook::xplat::module::CxxModule::Method(winrt::to_string(key), [this, value](folly::dynamic args)
-    {
-      std::string str = folly::toJson(args);
+    ret.push_back(facebook::xplat::module::CxxModule::Method(
+        winrt::to_string(key), [this, value](folly::dynamic args) {
+          std::string str = folly::toJson(args);
 
-      winrt::hstring para = winrt::to_hstring(str);
-      value(para);
-    }));
+          winrt::hstring para = winrt::to_hstring(str);
+          value(para);
+        }));
 
     methodsIter.MoveNext();
 
@@ -89,8 +86,7 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
   auto methodsWithCallBackMapView = m_module.MethodsWithCallback();
   auto methodsWithCallBackIter = methodsWithCallBackMapView.First();
 
-  do
-  {
+  do {
     if (!methodsWithCallBackIter.HasCurrent())
       break;
 
@@ -101,45 +97,44 @@ std::vector<facebook::xplat::module::CxxModule::Method> ABIModule::getMethods()
     key = pair.Key();
     abiCallback = pair.Value();
 
-    ret.push_back(
-      facebook::xplat::module::CxxModule::Method(
+    ret.push_back(facebook::xplat::module::CxxModule::Method(
         winrt::to_string(key),
-        [this, abiCallback = std::move(abiCallback)](folly::dynamic args, Callback cbSuccess, Callback cbFail)
-    {
-      // TODO: When to call the cbFail?  It's included in the Method
-      // construction above so that we use the right template and have
-      // everything work correctly across the bridge.  If not included then
-      // things don't appear to get set up correctly.  I've seen the result
-      // be that it causes the callback ID to end up being the value of a
-      // parameter.
-      std::string jsonArgs = folly::toJson(args);
-      winrt::hstring abiParameter = winrt::to_hstring(jsonArgs);
+        [this, abiCallback = std::move(abiCallback)](
+            folly::dynamic args, Callback cbSuccess, Callback cbFail) {
+          // TODO: When to call the cbFail?  It's included in the Method
+          // construction above so that we use the right template and have
+          // everything work correctly across the bridge.  If not included then
+          // things don't appear to get set up correctly.  I've seen the result
+          // be that it causes the callback ID to end up being the value of a
+          // parameter.
+          std::string jsonArgs = folly::toJson(args);
+          winrt::hstring abiParameter = winrt::to_hstring(jsonArgs);
 
-      auto callback = winrt::Microsoft::ReactNative::MethodCallback(
-        [cbSuccess = std::move(cbSuccess)](winrt::Windows::Foundation::Collections::IVectorView<winrt::hstring> argVectorView)
-      {
-        std::vector<folly::dynamic> args;
+          auto callback = winrt::Microsoft::ReactNative::MethodCallback(
+              [cbSuccess = std::move(cbSuccess)](
+                  winrt::Windows::Foundation::Collections::IVectorView<
+                      winrt::hstring> argVectorView) {
+                std::vector<folly::dynamic> args;
 
-        if (argVectorView != nullptr)
-        {
-          unsigned int size = argVectorView.Size();
+                if (argVectorView != nullptr) {
+                  unsigned int size = argVectorView.Size();
 
-          for (unsigned int i = 0; i < size; i++)
-          {
-            winrt::hstring itemString;
-            itemString = argVectorView.GetAt(i);
-            if (itemString.empty())
-              args.push_back(nullptr);
-            else
-              args.push_back(folly::parseJson(winrt::to_string(itemString)));
-          }
-        }
+                  for (unsigned int i = 0; i < size; i++) {
+                    winrt::hstring itemString;
+                    itemString = argVectorView.GetAt(i);
+                    if (itemString.empty())
+                      args.push_back(nullptr);
+                    else
+                      args.push_back(
+                          folly::parseJson(winrt::to_string(itemString)));
+                  }
+                }
 
-        cbSuccess(args);
-      });
+                cbSuccess(args);
+              });
 
-      abiCallback(abiParameter, callback);
-    }));
+          abiCallback(abiParameter, callback);
+        }));
 
     methodsWithCallBackIter.MoveNext();
   } while (true);

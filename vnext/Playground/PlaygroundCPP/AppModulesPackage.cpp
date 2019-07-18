@@ -12,16 +12,13 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 
-namespace winrt::Playground::implementation
-{
-  IVectorView<INativeModule> AppModulesPackage::CreateNativeModules(ReactContext const& reactContext)
-  {
-    auto modules = single_threaded_vector<INativeModule>(
-      {
+namespace winrt::Playground::implementation {
+IVectorView<INativeModule> AppModulesPackage::CreateNativeModules(
+    ReactContext const &reactContext) {
+  auto modules = single_threaded_vector<INativeModule>({
       winrt::make<SampleModule>(),
-      }
-    );
+  });
 
-    return modules.GetView();
-  }
+  return modules.GetView();
 }
+} // namespace winrt::Playground::implementation
