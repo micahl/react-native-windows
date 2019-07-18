@@ -28,10 +28,6 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x86">
-      <Configuration>Debug</Configuration>
-      <Platform>x86</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -43,10 +39,6 @@
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x86">
-      <Configuration>Release</Configuration>
-      <Platform>x86</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
@@ -82,11 +74,6 @@
     <Import Project="PropertySheet.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <!--
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <TargetExt>.dll</TargetExt>
-  </PropertyGroup>
-  -->
   <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -96,9 +83,9 @@
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <!--Temporarily disable cppwinrt heap enforcement to work around xaml compiler generated std::shared_ptr use -->
       <AdditionalOptions Condition="'$(CppWinRTHeapEnforcement)'==''">/DWINRT_NO_MAKE_DETECTION %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4453;4800;28204;4146;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(FollyDir);$(ReactNativeDir)\ReactCommon;$(ReactNativeWindowsDir)stubs;$(ReactNativeWindowsDir)include;$(ReactNativeWindowsDir)ReactWindowsCore;$(ReactNativeWindowsDir)include\ReactWindowsCore;$(ReactNativeWindowsDir)include\ReactUWP;$(YogaDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINRT_DLL;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;FOLLY_NO_CONFIG;NOMINMAX;NOJSC;_HAS_AUTO_PTR_ETC;RN_EXPORT=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FOLLY_NO_CONFIG;NOMINMAX;_HAS_AUTO_PTR_ETC;RN_EXPORT=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
