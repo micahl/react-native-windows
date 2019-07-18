@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 #include "pch.h"
 #include "ReactInstance.h"
 #if __has_include("Bridge.ReactInstance.g.cpp")

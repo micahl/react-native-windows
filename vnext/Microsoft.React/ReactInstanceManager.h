@@ -1,10 +1,14 @@
 #pragma once
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 #include "ReactInstanceManager.g.h"
+#include "ReactInit.h"
 #include <ReactUWP/IReactInstance.h>
 #include <ReactUWP/ReactUwp.h>
-#include <winrt\microsoft.reactnative.h>
 #include "LifecycleState.h"
-#include "ReactInit.h"
+#include "NativeModulesProvider.h"
+#include "ViewManagersProvider.h"
 
 namespace winrt::Microsoft::ReactNative::implementation {
 struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {

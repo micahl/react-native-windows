@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 #include "pch.h"
 #include "ReactRootView.h"
 #if __has_include("ReactRootView.g.cpp")

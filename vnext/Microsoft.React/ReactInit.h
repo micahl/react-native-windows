@@ -1,7 +1,9 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 #pragma once
 
 #include "NativeModulesProvider.h"
-#include "ReactInstanceManager.h"
 #include "ReactNativeHost.h"
 #include "ViewManagersProvider.h"
 
