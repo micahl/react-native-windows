@@ -11,6 +11,11 @@
 #include <ReactUWP/ReactUwp.h>
 
 namespace winrt::Microsoft::ReactNative::implementation {
+using namespace winrt;
+using namespace Microsoft::ReactNative;
+using namespace Microsoft::ReactNative::Bridge;
+using namespace Windows::Foundation::Collections;
+
 struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
   ReactNativeHost();
 
@@ -27,9 +32,7 @@ struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
   virtual hstring JavaScriptMainModuleName();
   virtual hstring JavaScriptBundleFile();
   virtual bool UseDeveloperSupport();
-  virtual Windows::Foundation::Collections::IVectorView<
-      Microsoft::ReactNative::IReactPackage>
-  Packages();
+  virtual IVectorView<IReactPackage> Packages();
 
   bool HasInstance() {
     return m_reactInstanceManager != nullptr;
@@ -48,9 +51,7 @@ struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
     return overridable().UseDeveloperSupport();
   }
 
-  winrt::Windows::Foundation::Collections::IVectorView<
-      winrt::Microsoft::ReactNative::IReactPackage>
-  get_Packages() {
+  IVectorView<IReactPackage> get_Packages() {
     return overridable().Packages();
   }
 

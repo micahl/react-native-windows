@@ -12,14 +12,14 @@
 #include "cxxreact/ModuleRegistry.h"
 
 using namespace winrt;
-using namespace Windows::UI::Xaml;
+using namespace Microsoft::ReactNative;
+using namespace Windows::Foundation::Collections;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 ReactInstanceManager::ReactInstanceManager(
     std::string jsBundleFile,
     std::string jsMainModuleName,
-    Windows::Foundation::Collections::IVectorView<
-        winrt::Microsoft::ReactNative::IReactPackage> &packages,
+    IVectorView<IReactPackage> &packages,
     bool useDeveloperSupport,
     LifecycleState initialLifecycleState)
     : m_jsBundleFile(jsBundleFile),
@@ -27,13 +27,13 @@ ReactInstanceManager::ReactInstanceManager(
       m_packages(packages),
       m_useDeveloperSupport(useDeveloperSupport) {
   if (packages == nullptr) {
-    throw winrt::hresult_invalid_argument(L"packages");
+    throw hresult_invalid_argument(L"packages");
   }
 }
 
 void ReactInstanceManager::OnSuspend() {
   OutputDebugStringW(L"ReactInstanceManager::OnSuspend not implemented");
-  // throw winrt::hresult_not_implemented(L"ReactInstanceManager::OnSuspend");
+  // throw hresult_not_implemented(L"ReactInstanceManager::OnSuspend");
 
   // DispatcherHelpers.AssertOnDispatcher();
 
@@ -53,7 +53,7 @@ void ReactInstanceManager::OnEnteredBackground() {
   OutputDebugStringW(
       L"ReactInstanceManager::OnEnteredBackground not implemented");
   // throw
-  // winrt::hresult_not_implemented(L"ReactInstanceManager::OnEnteredBackground");
+  // hresult_not_implemented(L"ReactInstanceManager::OnEnteredBackground");
 
   // DispatcherHelpers.AssertOnDispatcher();
   //_lifecycleStateMachine.OnEnteredBackground();
@@ -64,7 +64,7 @@ void ReactInstanceManager::OnLeavingBackground() {
   OutputDebugStringW(
       L"ReactInstanceManager::OnLeavingBackground not implemented");
   // throw
-  // winrt::hresult_not_implemented(L"ReactInstanceManager::OnLeavingBackground");
+  // hresult_not_implemented(L"ReactInstanceManager::OnLeavingBackground");
 
   // DispatcherHelpers.AssertOnDispatcher();
   //_lifecycleStateMachine.OnLeavingBackground();
@@ -73,12 +73,12 @@ void ReactInstanceManager::OnLeavingBackground() {
 // Used when the application resumes to reset the back button handling in
 // JavaScript.
 void ReactInstanceManager::OnResume(
-    Microsoft::ReactNative::OnResumeAction const &action) {
-  // winrt::fire_and_forget action();
+    OnResumeAction const &action) {
+  // fire_and_forget action();
   // action();
 
   OutputDebugStringW(L"ReactInstanceManager::OnResume not implemented");
-  // throw winrt::hresult_not_implemented(L"ReactInstanceManager::OnResume");
+  // throw hresult_not_implemented(L"ReactInstanceManager::OnResume");
 
   // see the ReactInstanceManager.cs from the C# implementation
   // DispatcherHelpers.Initialize();
@@ -99,7 +99,7 @@ void ReactInstanceManager::OnResume(
 void ReactInstanceManager::OnBackPressed() {
   OutputDebugStringW(L"ReactInstanceManager::OnBackPressed not implemented");
   // throw
-  // winrt::hresult_not_implemented(L"ReactInstanceManager.OnBackPressed");
+  // hresult_not_implemented(L"ReactInstanceManager.OnBackPressed");
   // TODO
 
   // DispatcherHelpers.AssertOnDispatcher();
@@ -107,7 +107,8 @@ void ReactInstanceManager::OnBackPressed() {
   // if (reactContext == null)
   //{
   //	RnLog.Warn(ReactConstants.RNW, $"ReactInstanceManager: OnBackPressed:
-  //Instance detached from instance manager."); 	InvokeDefaultOnBackPressed();
+  // Instance detached from instance manager.");
+  // InvokeDefaultOnBackPressed();
   //}
   // else
   //{

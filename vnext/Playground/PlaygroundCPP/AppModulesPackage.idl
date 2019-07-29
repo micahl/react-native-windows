@@ -5,7 +5,7 @@ namespace Playground
 {
   [default_interface]
   [webhosthidden]
-  runtimeclass AppModulesPackage : Microsoft.ReactNative.IReactPackage
+  runtimeclass AppModulesPackage : Microsoft.ReactNative.Bridge.IReactPackage
   {
       AppModulesPackage();
   }

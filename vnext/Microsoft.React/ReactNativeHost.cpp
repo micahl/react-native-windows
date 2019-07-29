@@ -93,9 +93,8 @@ bool ReactNativeHost::UseDeveloperSupport() {
 #endif
 }
 
-Windows::Foundation::Collections::IVectorView<
-    Microsoft::ReactNative::IReactPackage>
-ReactNativeHost::Packages() {
+
+auto ReactNativeHost::Packages() -> IVectorView<IReactPackage>{
   throw winrt::hresult_not_implemented(
       L"Must implement ReactNativeHost.Packages");
 }

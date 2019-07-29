@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Microsoft.ReactNative;
+using Microsoft.ReactNative.Bridge;
 using System;
 using System.Collections.Generic;
 using System.Linq;

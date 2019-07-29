@@ -3,23 +3,25 @@
 // Licensed under the MIT License.
 
 #include "Bridge.ReactInstance.g.h"
-#include "winrt/microsoft.reactnative.h"
+#include <winrt\Microsoft.ReactNative.h>
 
 namespace winrt::Microsoft::ReactNative::Bridge::implementation {
-struct ReactInstance : ReactInstanceT<ReactInstance> {
-  ReactInstance() = default;
-  winrt::Windows::Foundation::Collections::IIterable<
-      winrt::Microsoft::ReactNative::INativeModule>
-  NativeModules() {
-    return nullptr;
+  using namespace winrt;
+  using namespace Windows::Foundation;
+  using namespace Windows::Foundation::Collections;
+
+  struct ReactInstance : ReactInstanceT<ReactInstance> {
+    ReactInstance() = default;
+    IIterable<INativeModule> NativeModules() {
+      return nullptr;
+    };
+    void InvokeFunction(
+        hstring moduleName,
+        hstring method,
+        IVectorView<IInspectable> arguments,
+        hstring tracingName);
+    void InvokeCallback(int callbackId, IVectorView<IInspectable> arguments);
   };
-  void InvokeFunction(
-      hstring moduleName,
-      hstring method,
-      Windows::Data::Json::JsonArray arguments,
-      hstring tracingName);
-  void InvokeCallback(int callbackId, Windows::Data::Json::JsonArray arguments);
-};
 } // namespace winrt::Microsoft::ReactNative::Bridge::implementation
 
 // namespace winrt::Microsoft::ReactNative::Bridge::factory_implementation

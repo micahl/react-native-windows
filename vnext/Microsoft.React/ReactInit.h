@@ -8,15 +8,12 @@
 #include "ViewManagersProvider.h"
 
 #include <ReactUWP/ReactUwp.h>
-
-namespace react {
-namespace uwp {
-struct IReactInstanceCreator;
-struct IXamlRootView;
-} // namespace uwp
-} // namespace react
+#include <winrt\Microsoft.ReactNative.h>
 
 namespace winrt::Microsoft::ReactNative::implementation {
+using namespace winrt;
+using namespace Microsoft::ReactNative::Bridge;
+
 void InitReactNative();
 
 struct ReactInstanceCreator : react::uwp::IReactInstanceCreator {
@@ -37,4 +34,4 @@ struct ReactInstanceCreator : react::uwp::IReactInstanceCreator {
  private:
   std::shared_ptr<react::uwp::IReactInstance> m_instance;
 };
-} // namespace winrt::Microsoft::ReactNative::implementation
+} // namespace winrt::Microsoft::ReactNative::Bridge::implementation

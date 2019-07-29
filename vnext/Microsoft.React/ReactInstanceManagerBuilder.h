@@ -24,17 +24,14 @@ class ReactInstanceManagerBuilder {
     m_isLifecycleStateSet = TRUE;
   };
 
-  void Packages(Windows::Foundation::Collections::IVectorView<
-                winrt::Microsoft::ReactNative::IReactPackage> packages) {
+  void Packages(Windows::Foundation::Collections::IVectorView<IReactPackage> packages) {
     m_packages = packages;
   }
 
   winrt::Microsoft::ReactNative::ReactInstanceManager Build();
 
  private:
-  Windows::Foundation::Collections::IVectorView<
-      winrt::Microsoft::ReactNative::IReactPackage>
-      m_packages;
+  Windows::Foundation::Collections::IVectorView<IReactPackage> m_packages;
   std::wstring m_jsBundleFile{};
   std::wstring m_jsMainModuleName{};
   bool m_useDeveloperSupport{false};

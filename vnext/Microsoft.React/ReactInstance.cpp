@@ -7,21 +7,18 @@
 #include "Bridge.ReactInstance.g.cpp"
 #endif
 
-using namespace winrt;
-using namespace Windows::UI::Xaml;
-
 namespace winrt::Microsoft::ReactNative::Bridge::implementation {
 void ReactInstance::InvokeFunction(
     hstring moduleName,
     hstring method,
-    Windows::Data::Json::JsonArray arguments,
+    IVectorView<IInspectable> arguments,
     hstring tracingName) {
-  throw winrt::hresult_not_implemented(L"ReactInstance.InvokeFunction");
+  throw hresult_not_implemented(L"ReactInstance.InvokeFunction");
 }
 
 void ReactInstance::InvokeCallback(
     int callbackId,
-    Windows::Data::Json::JsonArray arguments) {
-  throw winrt::hresult_not_implemented(L"ReactInstance.InvokeCallback");
+    IVectorView<IInspectable> arguments) {
+  throw hresult_not_implemented(L"ReactInstance.InvokeCallback");
 }
 } // namespace winrt::Microsoft::ReactNative::Bridge::implementation

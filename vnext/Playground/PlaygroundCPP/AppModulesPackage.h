@@ -6,6 +6,7 @@
 
 using namespace winrt;
 using namespace Microsoft::ReactNative;
+using namespace Microsoft::ReactNative::Bridge;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 
@@ -13,8 +14,7 @@ namespace winrt::Playground::implementation {
 struct AppModulesPackage : AppModulesPackageT<AppModulesPackage> {
   AppModulesPackage() = default;
 
-  IVectorView<INativeModule> CreateNativeModules(
-      ReactContext const &reactContext);
+  IVectorView<INativeModule> CreateNativeModules(ReactContext const &reactContext);
 };
 } // namespace winrt::Playground::implementation
 

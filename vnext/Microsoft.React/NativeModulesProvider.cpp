@@ -2,15 +2,16 @@
 // Licensed under the MIT License.
 
 #include "pch.h"
-#include "NativeModulesProvider.h"
-#include <ReactUWP/ReactUwp.h>
 #include "ABIModule.h"
+#include "NativeModulesProvider.h"
 
-#include <folly/json.h>
+#include <folly\json.h>
+#include <ReactUWP\ReactUwp.h>
 #include <windows.foundation.h>
 #include "winrt\Windows.Foundation.Collections.h"
 #include "winrt\Windows.Foundation.h"
 
+namespace winrt::Microsoft::ReactNative::Bridge {
 /*-------------------------------------------------------------------------------
   NativeModulesProvider::GetModules
 -------------------------------------------------------------------------------*/
@@ -26,7 +27,9 @@ NativeModulesProvider::GetModules(
   for (auto module : m_modules) {
     modules.emplace_back(
         winrt::to_string(module.Name()),
-        [module]() { return std::make_unique<ABIModule>(module); },
+        [module]() {
+          return std::make_unique<ABIModule>(module);
+        },
         queueThread);
   }
 
@@ -34,6 +37,8 @@ NativeModulesProvider::GetModules(
 }
 
 void NativeModulesProvider::RegisterModule(
-    winrt::Microsoft::ReactNative::INativeModule const &module) {
+    winrt::Microsoft::ReactNative::Bridge::INativeModule const &module) {
   m_modules.push_back(module);
 }
+
+} // namespace winrt::Microsoft::ReactNative::Bridge

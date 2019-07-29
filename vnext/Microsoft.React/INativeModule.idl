@@ -1,18 +1,22 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-namespace Microsoft.ReactNative
-{
-  delegate void MethodDelegate(String args);
-  delegate void MethodCallback(Windows.Foundation.Collections.IVectorView<String> callback);
-  delegate void MethodWithCallbackDelegate(String args, MethodCallback callback);
+import "Promise.idl";
+
+namespace Microsoft.ReactNative.Bridge {
+
+  delegate void MethodDelegate(IVectorView<IInspectable> args);
+  delegate void MethodWithCallbackDelegate(IVectorView<IInspectable> args, MethodDelegate callback);
+  delegate void MethodWithPromise(IVectorView<IInspectable> args, Promise promise);
 
   [webhosthidden]
-  interface INativeModule
-  {
-    String Name{ get; };
-    Windows.Foundation.Collections.IMapView<String, String> Constants{ get; };
-    Windows.Foundation.Collections.IMapView<String, MethodDelegate> Methods{ get; };
-    Windows.Foundation.Collections.IMapView<String, MethodWithCallbackDelegate> MethodsWithCallback{ get; };
+  interface INativeModule {
+    String Name { get; };
+
+    Windows.Foundation.Collections.IMapView<String, IInspectable> Constants { get; };
+    Windows.Foundation.Collections.IMapView<String, MethodDelegate> Methods { get; };
+    Windows.Foundation.Collections.IMapView<String, MethodWithCallbackDelegate> MethodsWithCallback { get; };
+    Windows.Foundation.Collections.IMapView<String, MethodWithPromise> MethodsWithPromise { get; };
   };
-}
+
+} // namespace Microsoft.ReactNative

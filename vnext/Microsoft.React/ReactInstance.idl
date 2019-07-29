@@ -3,21 +3,18 @@
 
 import "INativeModule.idl";
 
-namespace Microsoft.ReactNative
+namespace Microsoft.ReactNative.Bridge
 {
 	interface IReactInstance
 	{
 		IIterable<INativeModule> NativeModules { get; };
-		void InvokeFunction(String moduleName, String method, Windows.Data.Json.JsonArray arguments, String tracingName);
-		void InvokeCallback(Int32 callbackId, Windows.Data.Json.JsonArray arguments);
+		void InvokeFunction(String moduleName, String method, IVectorView<IInspectable> arguments, String tracingName);
+		void InvokeCallback(Int32 callbackId, IVectorView<IInspectable> arguments);
 	};
-}
 
-namespace Microsoft.ReactNative.Bridge
-{
-    [webhosthidden]
-  	[default_interface]
-    runtimeclass ReactInstance : Microsoft.ReactNative.IReactInstance
-    {
-    }
+  [webhosthidden]
+  [default_interface]
+  runtimeclass ReactInstance : IReactInstance
+  {
+  };
 }

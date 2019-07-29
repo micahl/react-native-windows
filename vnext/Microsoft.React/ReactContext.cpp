@@ -3,15 +3,15 @@
 
 #include "pch.h"
 #include "ReactContext.h"
-#if __has_include("ReactContext.g.cpp")
-#include "ReactContext.g.cpp"
+#if __has_include("Bridge.ReactContext.g.cpp")
+#include "Bridge.ReactContext.g.cpp"
 #endif
 
 using namespace winrt;
-using namespace Windows::UI::Xaml;
+using namespace Microsoft::ReactNative::Bridge;
 
-namespace winrt::Microsoft::ReactNative::implementation {
-Microsoft::ReactNative::IReactInstance ReactContext::ReactInstance() {
-  throw winrt::hresult_not_implemented(L"ReactContext.ReactInstance.get");
-}
-} // namespace winrt::Microsoft::ReactNative::implementation
+namespace winrt::Microsoft::ReactNative::Bridge::implementation {
+  IReactInstance ReactContext::ReactInstance() {
+    throw winrt::hresult_not_implemented(L"ReactContext.ReactInstance.get");
+  }
+} // namespace winrt::Microsoft::ReactNative::Bridge::implementation

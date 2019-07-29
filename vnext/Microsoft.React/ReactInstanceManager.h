@@ -3,21 +3,25 @@
 // Licensed under the MIT License.
 
 #include "ReactInstanceManager.g.h"
-#include "ReactInit.h"
-#include <ReactUWP/IReactInstance.h>
-#include <ReactUWP/ReactUwp.h>
+#include <ReactUWP\IReactInstance.h>
+#include <ReactUWP\ReactUwp.h>
 #include "LifecycleState.h"
 #include "NativeModulesProvider.h"
+#include "ReactInit.h"
 #include "ViewManagersProvider.h"
 
 namespace winrt::Microsoft::ReactNative::implementation {
+using namespace winrt;
+using namespace Microsoft::ReactNative::Bridge;
+using namespace Windows::Foundation;
+using namespace Windows::Foundation::Collections;
+
 struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   ReactInstanceManager() = default;
   ReactInstanceManager(
       std::string jsBundleFile,
       std::string jsMainModuleName,
-      Windows::Foundation::Collections::IVectorView<
-          winrt::Microsoft::ReactNative::IReactPackage> &packages,
+      IVectorView<IReactPackage> &packages,
       bool useDeveloperSupport,
       LifecycleState initialLifecycleState);
 
@@ -29,16 +33,14 @@ struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   void OnSuspend();
   void OnEnteredBackground();
   void OnLeavingBackground();
-  void OnResume(Microsoft::ReactNative::OnResumeAction const &action);
+  void OnResume(OnResumeAction const &action);
 
   void OnBackPressed();
 
  private:
   std::string m_jsBundleFile{};
   std::string m_jsMainModuleName{};
-  Windows::Foundation::Collections::IVectorView<
-      winrt::Microsoft::ReactNative::IReactPackage>
-      m_packages;
+  IVectorView<IReactPackage> m_packages;
   bool m_useDeveloperSupport;
   std::shared_ptr<NativeModulesProvider> m_modulesProvider{nullptr};
   std::shared_ptr<ViewManagersProvider> m_viewManagersProvider{nullptr};

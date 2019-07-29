@@ -4,11 +4,9 @@
 import "INativeModule.idl";
 import "ReactContext.idl";
 
-namespace Microsoft.ReactNative
-{
+namespace Microsoft.ReactNative.Bridge {
   [webhosthidden]
-  interface IReactPackage
-  {
-	  IVectorView<INativeModule> CreateNativeModules(ReactContext reactContext);
+  interface IReactPackage {
+    IVectorView<Microsoft.ReactNative.Bridge.INativeModule> CreateNativeModules(Microsoft.ReactNative.Bridge.ReactContext reactContext);
   };
 }

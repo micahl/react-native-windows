@@ -4,17 +4,17 @@
 #include "pch.h"
 #include "ViewManagersProvider.h"
 
-#include <ReactUWP/ReactUwp.h>
-
+namespace winrt::Microsoft::ReactNative::Bridge {
 /*-------------------------------------------------------------------------------
         ViewManagersProvider::GetViewManagers
 -------------------------------------------------------------------------------*/
-std::vector<react::uwp::NativeViewManager>
-ViewManagersProvider::GetViewManagers(
-    const std::shared_ptr<react::uwp::IReactInstance> &instance) {
+auto ViewManagersProvider::GetViewManagers(
+    const std::shared_ptr<react::uwp::IReactInstance> &instance)
+    -> std::vector<react::uwp::NativeViewManager> {
   std::vector<react::uwp::NativeViewManager> viewManagers;
 
   // viewManagers.emplace_back(std::make_unique<Outlook::CalendarViewViewManager>(instance));
 
   return viewManagers;
 }
+} // namespace Microsoft::ReactNative::Bridge
