@@ -7,7 +7,7 @@
 #include "ReactSupport.h"
 #include <ReactUWP/ViewManagerProvider.h>
 #include <ReactWindowsCore/ViewManager.h>
-#include <winrt\Microsoft.ReactNative.h>
+#include <winrt/Microsoft.ReactNative.h>
 
 namespace winrt::Microsoft::ReactNative::Bridge {
 class ViewManagersProvider final : public react::uwp::ViewManagerProvider {

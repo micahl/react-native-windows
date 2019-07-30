@@ -5,8 +5,8 @@
 #include "ReactApplication.g.h"
 #include "ReactNativeHost.h"
 
-#include <winrt\Windows.ApplicationModel.Activation.h>
-#include <winrt\Windows.UI.Core.h>
+#include <winrt/Windows.ApplicationModel.Activation.h>
+#include <winrt/Windows.UI.Core.h>
 
 namespace winrt::Microsoft::ReactNative::implementation {
 struct ReactApplication : ReactApplicationT<ReactApplication> {

@@ -3,8 +3,7 @@
 // Licensed under the MIT License.
 
 #include "ReactSupport.h"
-#include <winrt\Microsoft.ReactNative.h>
-#include <winrt\Microsoft.ReactNative.Bridge.h>
+#include <winrt/Microsoft.ReactNative.h>
 
 namespace winrt::Microsoft::ReactNative::Bridge {
   using namespace winrt;

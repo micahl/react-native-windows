@@ -2,10 +2,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-#include <ReactUWP\IReactInstance.h>
-#include <winrt\microsoft.reactnative.h>
 #include "LifecycleState.h"
 #include "ReactInstanceManager.h"
+
+#include <ReactUWP/IReactInstance.h>
+#include <winrt/microsoft.reactnative.h>
 
 namespace winrt::Microsoft::ReactNative::implementation {
 class ReactInstanceManagerBuilder {

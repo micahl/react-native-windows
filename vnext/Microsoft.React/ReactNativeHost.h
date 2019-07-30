@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 #include "ReactNativeHost.g.h"
+
 #include "ReactInstanceManager.h"
 #include "ReactRootView.h"
 

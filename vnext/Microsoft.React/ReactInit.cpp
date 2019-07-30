@@ -3,7 +3,6 @@
 
 #include "pch.h"
 #include "ReactInit.h"
-//#include <ReactUWP/IXamlRootView.h>
 #include <ReactUWP/ReactUwp.h>
 
 using namespace winrt;

@@ -4,8 +4,8 @@
 
 #include "ReactSupport.h"
 #include <NativeModuleProvider.h>
-#include <winrt\Microsoft.ReactNative.h>
-#include <winrt\Microsoft.ReactNative.Bridge.h>
+#include <winrt/Microsoft.ReactNative.h>
+#include <winrt/Microsoft.ReactNative.Bridge.h>
 //
 namespace winrt::Microsoft::ReactNative::Bridge {
 using namespace winrt;

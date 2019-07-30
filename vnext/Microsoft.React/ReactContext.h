@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 #include "Bridge.ReactContext.g.h"
-#include <winrt/Windows.Data.Json.h>
 
 namespace winrt::Microsoft::ReactNative::Bridge::implementation {
 struct ReactContext : ReactContextT<ReactContext> {

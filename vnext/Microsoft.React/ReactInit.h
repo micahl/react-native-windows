@@ -8,7 +8,7 @@
 #include "ViewManagersProvider.h"
 
 #include <ReactUWP/ReactUwp.h>
-#include <winrt\Microsoft.ReactNative.h>
+#include <winrt/Microsoft.ReactNative.h>
 
 namespace winrt::Microsoft::ReactNative::implementation {
 using namespace winrt;

@@ -3,12 +3,14 @@
 // Licensed under the MIT License.
 
 #include "ReactInstanceManager.g.h"
-#include <ReactUWP\IReactInstance.h>
-#include <ReactUWP\ReactUwp.h>
+
 #include "LifecycleState.h"
 #include "NativeModulesProvider.h"
 #include "ReactInit.h"
 #include "ViewManagersProvider.h"
+
+#include <ReactUWP/IReactInstance.h>
+#include <ReactUWP/ReactUwp.h>
 
 namespace winrt::Microsoft::ReactNative::implementation {
 using namespace winrt;

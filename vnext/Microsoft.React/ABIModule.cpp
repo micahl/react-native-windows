@@ -3,13 +3,13 @@
 
 #include "pch.h"
 #include "ABIModule.h"
-#include <ReactUWP/ReactUwp.h>
 #include "NativeModulesProvider.h"
 #include "Promise.h"
 
 #include <folly/json.h>
-#include "winrt\Windows.Foundation.h"
-#include "winrt\Windows.Foundation.Collections.h"
+#include <ReactUWP/ReactUwp.h>
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
 
 namespace winrt::Microsoft::ReactNative::Bridge {
 

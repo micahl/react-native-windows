@@ -7,9 +7,9 @@
 #include "ReactInstanceManager.g.cpp"
 #endif
 
-#include "cxxreact/CxxModule.h"
-#include "cxxreact/Instance.h"
-#include "cxxreact/ModuleRegistry.h"
+#include <cxxreact/CxxModule.h>
+#include <cxxreact/Instance.h>
+#include <cxxreact/ModuleRegistry.h>
 
 using namespace winrt;
 using namespace Microsoft::ReactNative;

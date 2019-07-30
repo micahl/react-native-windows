@@ -4,16 +4,14 @@
 
 #include "ReactRootView.g.h"
 
-#include <ViewManagerProvider.h>
+#include "ReactApplication.h"
+#include "ReactInstanceManager.h"
+#include "ReactNativeHost.h"
+#include "ViewManagerProvider.h"
 
 #include <ReactUWP/IReactInstance.h>
 #include <ReactUWP/IXamlRootView.h>
 #include <ReactUWP/ReactUwp.h>
-//#include <winrt/microsoft.reactnative.h>
-
-#include "ReactApplication.h"
-#include "ReactInstanceManager.h"
-#include "ReactNativeHost.h"
 
 namespace winrt::Microsoft::ReactNative::implementation {
 // std::shared_ptr<react::uwp::IXamlRootView>
