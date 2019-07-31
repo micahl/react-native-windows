@@ -4,6 +4,7 @@
 import "IReactPackage.idl";
 import "INativeModule.idl";
 import "ReactInstanceManager.idl";
+import "ReactInstanceSettings.idl";
 import "ReactRootView.idl";
 
 namespace Microsoft.ReactNative
@@ -27,6 +28,8 @@ namespace Microsoft.ReactNative
     overridable Boolean UseDeveloperSupport{ get; };
     overridable String JavaScriptMainModuleName{ get; };
     overridable String JavaScriptBundleFile{ get; };
+
+    overridable Microsoft.ReactNative.ReactInstanceSettings InstanceSettings { get; };
 
     Windows.UI.Xaml.UIElement OnCreate();
 

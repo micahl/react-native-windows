@@ -4,35 +4,49 @@
 
 #include "LifecycleState.h"
 #include "ReactInstanceManager.h"
+#include "ReactInstanceSettings.h"
 
 #include <ReactUWP/IReactInstance.h>
 #include <winrt/microsoft.reactnative.h>
 
+using namespace winrt;
+using namespace Microsoft::ReactNative;
+
 namespace winrt::Microsoft::ReactNative::implementation {
 class ReactInstanceManagerBuilder {
  public:
-  void JavaScriptBundleFile(winrt::hstring jsBundleFile) {
+  void JavaScriptBundleFile(hstring jsBundleFile) {
     m_jsBundleFile = jsBundleFile;
   };
-  void JavaScriptMainModuleName(winrt::hstring jsMainModuleName) {
+  void JavaScriptMainModuleName(hstring jsMainModuleName) {
     m_jsMainModuleName = jsMainModuleName;
   };
   void UseDeveloperSupport(bool useDevSupport) {
     m_useDeveloperSupport = useDevSupport;
   };
-  void InitialLifecycleState(LifecycleState state) {
+
+  Microsoft::ReactNative::ReactInstanceSettings InstanceSettings() {
+    return m_instanceSettings;
+  }
+
+  void InstanceSettings(Microsoft::ReactNative::ReactInstanceSettings const& settings) {
+    m_instanceSettings = settings;
+  }
+
+  void InitialLifecycleState(LifecycleState const& state) {
     m_initialLifecycleState = state;
     m_isLifecycleStateSet = TRUE;
   };
 
-  void Packages(Windows::Foundation::Collections::IVectorView<IReactPackage> packages) {
+  void Packages(IVectorView<IReactPackage> const& packages) {
     m_packages = packages;
   }
 
-  winrt::Microsoft::ReactNative::ReactInstanceManager Build();
+  Microsoft::ReactNative::ReactInstanceManager Build();
 
  private:
   Windows::Foundation::Collections::IVectorView<IReactPackage> m_packages;
+  Microsoft::ReactNative::ReactInstanceSettings m_instanceSettings;
   std::wstring m_jsBundleFile{};
   std::wstring m_jsMainModuleName{};
   bool m_useDeveloperSupport{false};

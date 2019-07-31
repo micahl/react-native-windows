@@ -17,12 +17,14 @@ using namespace Windows::Foundation::Collections;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 ReactInstanceManager::ReactInstanceManager(
+    Microsoft::ReactNative::ReactInstanceSettings instanceSettings,
     std::string jsBundleFile,
     std::string jsMainModuleName,
     IVectorView<IReactPackage> &packages,
     bool useDeveloperSupport,
     LifecycleState initialLifecycleState)
-    : m_jsBundleFile(jsBundleFile),
+    : m_instanceSettings(instanceSettings),
+      m_jsBundleFile(jsBundleFile),
       m_jsMainModuleName(jsMainModuleName),
       m_packages(packages),
       m_useDeveloperSupport(useDeveloperSupport) {
@@ -142,6 +144,7 @@ ReactInstanceManager::InstanceCreator() {
     }
 
     m_reactInstanceCreator = std::make_shared<ReactInstanceCreator>(
+        m_instanceSettings,
         m_jsBundleFile,
         m_jsMainModuleName,
         m_modulesProvider,

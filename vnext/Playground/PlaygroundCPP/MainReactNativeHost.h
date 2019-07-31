@@ -27,6 +27,15 @@ struct MainReactNativeHost : MainReactNativeHostT<MainReactNativeHost> {
         {winrt::make<AppModulesPackage>()});
     return packages.GetView();
   };
+  ReactInstanceSettings InstanceSettings() {
+    auto settings = ReactInstanceSettings();
+#if DEBUG
+    settings.UseLiveReload(true); // true by default in debug builds already
+    settings.UseWebDebugger(true); // true by default in debug builds already
+#endif
+    settings.UseJsi(true);
+    return settings;
+  };
 };
 } // namespace winrt::Playground::implementation
 

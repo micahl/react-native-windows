@@ -7,6 +7,7 @@
 using namespace winrt::Microsoft::ReactNative;
 
 namespace winrt::Microsoft::ReactNative::implementation {
+
 winrt::Microsoft::ReactNative::ReactInstanceManager
 ReactInstanceManagerBuilder::Build() {
   if (!m_isLifecycleStateSet) {
@@ -25,6 +26,7 @@ ReactInstanceManagerBuilder::Build() {
   }
 
   auto instanceManager = winrt::make<ReactInstanceManager>(
+      m_instanceSettings,
       winrt::to_string(m_jsBundleFile),
       winrt::to_string(m_jsMainModuleName),
       m_packages,

@@ -10,14 +10,16 @@
 #include <ReactUWP/ReactUwp.h>
 #include <winrt/Microsoft.ReactNative.h>
 
-namespace winrt::Microsoft::ReactNative::implementation {
 using namespace winrt;
+using namespace Microsoft::ReactNative;
 using namespace Microsoft::ReactNative::Bridge;
 
+namespace winrt::Microsoft::ReactNative::implementation {
 void InitReactNative();
 
 struct ReactInstanceCreator : react::uwp::IReactInstanceCreator {
   ReactInstanceCreator(
+      Microsoft::ReactNative::ReactInstanceSettings instanceSettings,
       std::string jsBundleFile,
       std::string jsMainModuleName,
       std::shared_ptr<NativeModulesProvider> modulesProvider,
@@ -32,6 +34,7 @@ struct ReactInstanceCreator : react::uwp::IReactInstanceCreator {
   void markAsNeedsReload();
 
  private:
+  Microsoft::ReactNative::ReactInstanceSettings m_instanceSettings{};
   std::shared_ptr<react::uwp::IReactInstance> m_instance;
 };
-} // namespace winrt::Microsoft::ReactNative::Bridge::implementation
+} // namespace winrt::Microsoft::ReactNative::implementation

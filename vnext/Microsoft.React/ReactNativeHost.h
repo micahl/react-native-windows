@@ -5,17 +5,19 @@
 #include "ReactNativeHost.g.h"
 
 #include "ReactInstanceManager.h"
+#include "ReactInstanceSettings.h"
 #include "ReactRootView.h"
 
 #include <ReactUWP/IReactInstance.h>
 #include <ReactUWP/IXamlRootView.h>
 #include <ReactUWP/ReactUwp.h>
 
-namespace winrt::Microsoft::ReactNative::implementation {
 using namespace winrt;
 using namespace Microsoft::ReactNative;
 using namespace Microsoft::ReactNative::Bridge;
 using namespace Windows::Foundation::Collections;
+
+namespace winrt::Microsoft::ReactNative::implementation {
 
 struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
   ReactNativeHost();
@@ -35,6 +37,8 @@ struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
   virtual bool UseDeveloperSupport();
   virtual IVectorView<IReactPackage> Packages();
 
+  virtual winrt::Microsoft::ReactNative::ReactInstanceSettings InstanceSettings();
+
   bool HasInstance() {
     return m_reactInstanceManager != nullptr;
   }
@@ -50,6 +54,10 @@ struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
   }
   bool get_UseDeveloperSupport() {
     return overridable().UseDeveloperSupport();
+  }
+
+  winrt::Microsoft::ReactNative::ReactInstanceSettings get_InstanceSettings() {
+    return overridable().InstanceSettings();
   }
 
   IVectorView<IReactPackage> get_Packages() {

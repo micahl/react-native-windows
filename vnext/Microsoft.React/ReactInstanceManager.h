@@ -7,6 +7,7 @@
 #include "LifecycleState.h"
 #include "NativeModulesProvider.h"
 #include "ReactInit.h"
+#include "ReactInstanceSettings.h"
 #include "ViewManagersProvider.h"
 
 #include <ReactUWP/IReactInstance.h>
@@ -14,6 +15,7 @@
 
 namespace winrt::Microsoft::ReactNative::implementation {
 using namespace winrt;
+using namespace Microsoft::ReactNative;
 using namespace Microsoft::ReactNative::Bridge;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
@@ -21,6 +23,7 @@ using namespace Windows::Foundation::Collections;
 struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   ReactInstanceManager() = default;
   ReactInstanceManager(
+      Microsoft::ReactNative::ReactInstanceSettings instanceSettings,
       std::string jsBundleFile,
       std::string jsMainModuleName,
       IVectorView<IReactPackage> &packages,
@@ -40,6 +43,7 @@ struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   void OnBackPressed();
 
  private:
+  Microsoft::ReactNative::ReactInstanceSettings m_instanceSettings{};
   std::string m_jsBundleFile{};
   std::string m_jsMainModuleName{};
   IVectorView<IReactPackage> m_packages;

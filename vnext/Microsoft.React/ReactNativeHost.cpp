@@ -7,6 +7,7 @@
 #include "ReactInit.h"
 #include "ReactInstanceManager.h"
 #include "ReactInstanceManagerBuilder.h"
+#include "ReactInstanceSettings.h"
 #include "ReactRootView.h"
 
 #include <NativeModuleProvider.h>
@@ -93,10 +94,14 @@ bool ReactNativeHost::UseDeveloperSupport() {
 #endif
 }
 
-
-auto ReactNativeHost::Packages() -> IVectorView<IReactPackage>{
+auto ReactNativeHost::Packages() -> IVectorView<IReactPackage> {
   throw winrt::hresult_not_implemented(
       L"Must implement ReactNativeHost.Packages");
+}
+auto ReactNativeHost::InstanceSettings()
+    -> winrt::Microsoft::ReactNative::ReactInstanceSettings {
+  // Return the default
+  return winrt::make<ReactInstanceSettings>();
 }
 
 void ReactNativeHost::Init() {
@@ -112,6 +117,7 @@ void ReactNativeHost::Init() {
 winrt::Microsoft::ReactNative::ReactInstanceManager
 ReactNativeHost::CreateReactInstanceManager() {
   auto builder = ReactInstanceManagerBuilder();
+  builder.InstanceSettings(get_InstanceSettings());
   builder.UseDeveloperSupport(UseDeveloperSupport());
   builder.InitialLifecycleState(LifecycleState::BeforeCreate);
   builder.JavaScriptBundleFile(get_JavaScriptBundleFile());

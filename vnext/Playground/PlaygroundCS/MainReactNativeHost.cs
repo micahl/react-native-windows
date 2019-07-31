@@ -22,5 +22,14 @@ namespace Playground
         return new[] { new AppModulesPackage() };
       }
     }
+
+    protected override ReactInstanceSettings InstanceSettings => new ReactInstanceSettings()
+    {
+#if DEBUG
+      UseWebDebugger = true,
+      UseLiveReload = true,
+#endif
+      UseJsi = true,
+    };
   }
 }

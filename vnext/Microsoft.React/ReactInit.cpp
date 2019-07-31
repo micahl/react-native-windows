@@ -22,11 +22,13 @@ void InitReactNative() {
 }
 
 ReactInstanceCreator::ReactInstanceCreator(
+    Microsoft::ReactNative::ReactInstanceSettings instanceSettings,
     std::string jsBundleFile,
     std::string jsMainModuleName,
     std::shared_ptr<NativeModulesProvider> modulesProvider,
     std::shared_ptr<ViewManagersProvider> viewManagersProvider)
-    : m_jsBundleFile(jsBundleFile),
+    : m_instanceSettings(instanceSettings),
+      m_jsBundleFile(jsBundleFile),
       m_jsMainModuleName(jsMainModuleName),
       m_modulesProvider(modulesProvider),
       m_viewManagersProvider(viewManagersProvider) {
@@ -49,8 +51,16 @@ ReactInstanceCreator::getInstance() {
           m_modulesProvider, m_viewManagersProvider);
 
   react::uwp::ReactInstanceSettings settings;
-  settings.UseWebDebugger = true;
-  settings.UseLiveReload = true;
+  settings.BundleRootPath = to_string(m_instanceSettings.BundleRootPath());
+  settings.ByteCodeFileUri = to_string(m_instanceSettings.ByteCodeFileUri());
+  settings.DebugBundlePath = to_string(m_instanceSettings.DebugBundlePath());
+  settings.DebugHost = to_string(m_instanceSettings.DebugHost());
+  settings.EnableByteCodeCacheing = m_instanceSettings.EnableByteCodeCaching();
+  settings.EnableJITCompilation = m_instanceSettings.EnableJITCompilation();
+  settings.UseDirectDebugger = m_instanceSettings.UseDirectDebugger();
+  settings.UseJsi = m_instanceSettings.UseJsi();
+  settings.UseLiveReload = m_instanceSettings.UseLiveReload();
+  settings.UseWebDebugger = m_instanceSettings.UseWebDebugger();
 
   reactInstance->Start(reactInstance, settings);
 

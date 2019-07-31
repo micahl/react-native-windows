@@ -144,6 +144,10 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="ReactInstanceManagerBuilder.h" />
+    <ClInclude Include="ReactInstanceSettings.h">
+      <DependentUpon>ReactInstanceSettings.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="ReactNativeHost.h">
       <DependentUpon>ReactNativeHost.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -187,6 +191,10 @@
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="ReactInstanceManagerBuilder.cpp" />
+    <ClCompile Include="ReactInstanceSettings.cpp">
+      <DependentUpon>ReactInstanceSettings.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="ReactNativeHost.cpp">
       <DependentUpon>ReactNativeHost.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -214,6 +222,9 @@
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="ReactInstanceManager.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="ReactInstanceSettings.idl">
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="ReactNativeHost.idl">
