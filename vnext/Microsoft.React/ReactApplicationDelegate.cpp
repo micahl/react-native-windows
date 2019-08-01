@@ -76,11 +76,10 @@ void ReactApplicationDelegate::OnActivated(
 // Create the root view for the ReactNative app
 UIElement ReactApplicationDelegate::OnCreate(hstring const &arguments) {
   auto host = m_reactApplication.Host();
-  // auto instanceManager = host.InstanceCreator();
   host.OnResume([=]() { m_application.Exit(); });
 
   ApplyArguments(host, arguments.c_str());
-  return host.OnCreate();
+  return host.GetOrCreateRootView(nullptr);
 }
 
 void ReactApplicationDelegate::OnResuming(

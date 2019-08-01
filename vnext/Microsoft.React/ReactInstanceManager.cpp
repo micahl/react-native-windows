@@ -12,9 +12,9 @@
 #include <cxxreact/ModuleRegistry.h>
 
 using namespace winrt;
-using namespace Microsoft::ReactNative;
-using namespace Microsoft::ReactNative::Bridge;
-using namespace Windows::Foundation::Collections;
+using namespace winrt::Microsoft::ReactNative;
+using namespace winrt::Microsoft::ReactNative::Bridge;
+using namespace winrt::Windows::Foundation::Collections;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 ReactInstanceManager::ReactInstanceManager(
@@ -171,7 +171,7 @@ auto ReactInstanceManager::CreateReactContextCore() -> ReactContext {
 
     // TODO: Define a CoreModulesPackage, load it here.
     // TODO: Wrap/re-implement our existing set of core modules and add
-    // them to the CoreModulesPackage. 
+    // them to the CoreModulesPackage.
 
     for (auto package : m_packages) {
       auto modules = package.CreateNativeModules(reactContext);

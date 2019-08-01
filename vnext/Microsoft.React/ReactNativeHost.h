@@ -13,16 +13,16 @@
 #include <ReactUWP/ReactUwp.h>
 
 using namespace winrt;
-using namespace Microsoft::ReactNative;
-using namespace Microsoft::ReactNative::Bridge;
-using namespace Windows::Foundation::Collections;
+using namespace winrt::Microsoft::ReactNative;
+using namespace winrt::Microsoft::ReactNative::Bridge;
+using namespace winrt::Windows::Foundation::Collections;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 
 struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
   ReactNativeHost();
 
-  UIElement OnCreate();
+  UIElement GetOrCreateRootView(IInspectable initialProps);
 
   winrt::Microsoft::ReactNative::ReactInstanceManager ReactInstanceManager();
 

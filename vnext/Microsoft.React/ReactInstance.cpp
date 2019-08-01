@@ -7,7 +7,7 @@
 #include "Bridge.ReactInstance.g.cpp"
 #endif
 
-#include "ABIModule.h"
+#include "ReactSupport.h"
 
 namespace winrt::Microsoft::ReactNative::Bridge::implementation {
 void ReactInstance::InvokeFunction(
@@ -15,7 +15,7 @@ void ReactInstance::InvokeFunction(
     hstring const& method,
     IVectorView<IInspectable> const& arguments) {
   folly::dynamic args =
-      Microsoft::ReactNative::Bridge::ABIModule::ConvertToDynamic(arguments);
+      Microsoft::ReactNative::Bridge::ConvertToDynamic(arguments);
 
   m_instance->CallJsFunction(to_string(moduleName), to_string(method), std::move(args));
 }

@@ -203,6 +203,7 @@
       <DependentUpon>ReactRootView.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="ReactSupport.cpp" />
     <ClCompile Include="ViewManagersProvider.cpp" />
   </ItemGroup>
   <ItemGroup>

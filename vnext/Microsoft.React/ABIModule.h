@@ -29,8 +29,6 @@ class ABIModule : public facebook::xplat::module::CxxModule {
   std::map<std::string, folly::dynamic> getConstants() override;
   std::vector<facebook::xplat::module::CxxModule::Method> getMethods() override;
 
-  static folly::dynamic ConvertToDynamic(IInspectable const &object);
-
  private:
   INativeModule m_module{nullptr};
 

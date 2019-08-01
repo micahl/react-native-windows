@@ -31,7 +31,7 @@ namespace Microsoft.ReactNative
 
     overridable Microsoft.ReactNative.ReactInstanceSettings InstanceSettings { get; };
 
-    Windows.UI.Xaml.UIElement OnCreate();
+    Windows.UI.Xaml.UIElement GetOrCreateRootView(IInspectable initialProps);
 
     void OnSuspend();
     void OnEnteredBackground();

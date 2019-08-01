@@ -4,11 +4,13 @@
 #include "pch.h"
 #include "ReactNativeHost.h"
 #include "ReactNativeHost.g.cpp"
+
 #include "ReactInit.h"
 #include "ReactInstanceManager.h"
 #include "ReactInstanceManagerBuilder.h"
 #include "ReactInstanceSettings.h"
 #include "ReactRootView.h"
+#include "ReactSupport.h"
 
 #include <NativeModuleProvider.h>
 #include <ViewManager.h>
@@ -32,17 +34,19 @@ ReactNativeHost::ReactInstanceManager() {
   return m_reactInstanceManager;
 }
 
-UIElement ReactNativeHost::OnCreate() {
-  folly::dynamic initialProps = folly::dynamic::object();
+UIElement ReactNativeHost::GetOrCreateRootView(IInspectable initialProps) {
+  if (m_reactRootView != nullptr)
+    return *m_reactRootView;
+
+  folly::dynamic props =
+      Microsoft::ReactNative::Bridge::ConvertToDynamic(initialProps);
 
   m_reactRootView = CreateRootView();
-
-  if (m_reactRootView == nullptr)
-    return nullptr;
+  assert(m_reactRootView != nullptr);
 
   m_reactRootView->OnCreate(*this);
   m_reactRootView->StartReactApplication(
-      ReactInstanceManager(), get_MainComponentName(), initialProps);
+      ReactInstanceManager(), get_MainComponentName(), props);
 
   return *m_reactRootView;
 }
@@ -95,8 +99,7 @@ bool ReactNativeHost::UseDeveloperSupport() {
 }
 
 auto ReactNativeHost::Packages() -> IVectorView<IReactPackage> {
-  throw winrt::hresult_not_implemented(
-      L"Must implement ReactNativeHost.Packages");
+  return single_threaded_vector<IReactPackage>().GetView();
 }
 auto ReactNativeHost::InstanceSettings()
     -> winrt::Microsoft::ReactNative::ReactInstanceSettings {

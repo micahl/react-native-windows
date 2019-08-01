@@ -10,7 +10,7 @@
 #include <winrt/microsoft.reactnative.h>
 
 using namespace winrt;
-using namespace Microsoft::ReactNative;
+using namespace winrt::Microsoft::ReactNative;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 class ReactInstanceManagerBuilder {
