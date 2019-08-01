@@ -44,11 +44,22 @@ void ReactRootView::StartReactApplication(
     winrt::Microsoft::ReactNative::ReactInstanceManager const &instanceManager,
     winrt::hstring componentName,
     folly::dynamic initialProps) {
-  auto impl = instanceManager.as<ReactInstanceManager>();
-  auto instanceCreator = impl->InstanceCreator();
+
+  m_reactInstanceManager = instanceManager;
+  m_moduleName = componentName;
+  m_initialProps = initialProps;
+
+  // Nudge the ReactInstanceManager to create the instance and wrapping context
+  ReactInstanceManager* instanceManagerImpl{ get_self<ReactInstanceManager>(instanceManager) };
+
+  auto context = instanceManagerImpl->GetOrCreateReactContext();
+  auto instanceCreator = instanceManagerImpl->InstanceCreator();
 
   m_xamlView = react::uwp::CreateReactRootView(
-      *this, componentName.c_str(), instanceCreator);
+    *this,
+    componentName.c_str(),
+    instanceCreator);
+
   if (m_xamlView == nullptr)
     return;
 

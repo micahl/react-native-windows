@@ -6,6 +6,7 @@
 
 #include "LifecycleState.h"
 #include "NativeModulesProvider.h"
+#include "ReactContext.h"
 #include "ReactInit.h"
 #include "ReactInstanceSettings.h"
 #include "ViewManagersProvider.h"
@@ -30,6 +31,14 @@ struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
       bool useDeveloperSupport,
       LifecycleState initialLifecycleState);
 
+  ReactContext GetOrCreateReactContext();
+  ReactContext CurrentReactContext() {
+    return m_currentReactContext;
+  }
+
+  // TODO: ReactInstanceManager should be generating ReactContext objects
+  // where the ReactContext references the ReactInstance (which would
+  // reference the real implementation.
   std::shared_ptr<react::uwp::IReactInstanceCreator> InstanceCreator();
   std::shared_ptr<react::uwp::IReactInstance> Instance() {
     return InstanceCreator()->getInstance();
@@ -43,7 +52,8 @@ struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   void OnBackPressed();
 
  private:
-  Microsoft::ReactNative::ReactInstanceSettings m_instanceSettings{};
+  ReactContext m_currentReactContext{nullptr};
+  Microsoft::ReactNative::ReactInstanceSettings m_instanceSettings{nullptr};
   std::string m_jsBundleFile{};
   std::string m_jsMainModuleName{};
   IVectorView<IReactPackage> m_packages;
@@ -56,6 +66,8 @@ struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   //	instances on live reload.
   std::shared_ptr<react::uwp::IReactInstanceCreator> m_reactInstanceCreator{
       nullptr};
+
+  ReactContext CreateReactContextCore();
 };
 } // namespace winrt::Microsoft::ReactNative::implementation
 

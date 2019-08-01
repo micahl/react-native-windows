@@ -9,6 +9,7 @@ namespace Microsoft.ReactNative.Bridge
     [webhosthidden]
     runtimeclass ReactContext
     {
+        ReactContext();
         IReactInstance ReactInstance { get; };
     }
 }

@@ -8,7 +8,7 @@ namespace Microsoft.ReactNative.Bridge
 	interface IReactInstance
 	{
 		IIterable<INativeModule> NativeModules { get; };
-		void InvokeFunction(String moduleName, String method, IVectorView<IInspectable> arguments, String tracingName);
+		void InvokeFunction(String moduleName, String method, IVectorView<IInspectable> arguments);
 		void InvokeCallback(Int32 callbackId, IVectorView<IInspectable> arguments);
 	};
 
@@ -16,5 +16,6 @@ namespace Microsoft.ReactNative.Bridge
   [default_interface]
   runtimeclass ReactInstance : IReactInstance
   {
+    ReactInstance();
   };
 }

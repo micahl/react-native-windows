@@ -7,11 +7,38 @@
 #include "Bridge.ReactContext.g.cpp"
 #endif
 
+#include "ABIModule.h"
+
 using namespace winrt;
 using namespace Microsoft::ReactNative::Bridge;
 
 namespace winrt::Microsoft::ReactNative::Bridge::implementation {
-  IReactInstance ReactContext::ReactInstance() {
-    throw winrt::hresult_not_implemented(L"ReactContext.ReactInstance.get");
+IReactInstance ReactContext::ReactInstance() {
+  if (m_reactInstance == nullptr) {
+    throw hresult_invalid_operation(L"ReactInstance has not yet been set.");
   }
+
+  return m_reactInstance;
+}
+
+void ReactContext::InitializeWithInstance(
+    Bridge::ReactInstance const &instance) {
+  if (instance == nullptr) {
+    throw hresult_null_argument(L"instance");
+  }
+
+  if (m_reactInstance != nullptr) {
+    throw hresult_invalid_argument(L"ReactInstance has already been set.");
+  }
+  m_reactInstance = instance;
+}
+
+void ReactContext::CallJSFunction(
+    hstring const &moduleName,
+    hstring const &method,
+    IVectorView<IInspectable> const &params) {
+  if (m_reactInstance == nullptr) {
+    ReactInstance().InvokeFunction(moduleName, method, params);
+  }
+}
 } // namespace winrt::Microsoft::ReactNative::Bridge::implementation
