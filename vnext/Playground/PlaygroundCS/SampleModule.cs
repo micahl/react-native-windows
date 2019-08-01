@@ -20,41 +20,55 @@ namespace Playground
       { "a", "\"b\"" },
     };
 
-    public IReadOnlyDictionary<string, MethodDelegate> Methods { get; }
-      = new Dictionary<string, MethodDelegate>()
+    public IReadOnlyList<MethodInfo> Methods { get; }
+      = new List<MethodInfo>()
       {
-        { "method1", (args) => { /* fire and forget */ }}
-      };
-
-    public IReadOnlyDictionary<string, MethodWithCallbackDelegate> MethodsWithCallback { get; }
-      = new Dictionary<string, MethodWithCallbackDelegate>()
-      {
-        { "method2", (args, callback) => {
-          Debug.WriteLine($"SampleModule.method2(${args})");
+        // Fire and forget Actions
+        new MethodInfo(
+          "method1", ReturnType.Void,
+          (_, __, ___) => {
+          Debug.WriteLine("SampleModule.method1()");
+        }),
+        // Methods with Callbacks
+        new MethodInfo(
+          "method2", ReturnType.Callback,
+          (args, callback, _) => {
+          Debug.WriteLine($"SampleModule.method2({String.Join(", ", args)})");
 
             // Build up a complex object to pass back as arguments when invoking
             // the callback.  They'll automatically be converted to an equivalent
             // type in JavaScript when the JS function is called.
             var parameters = new List<object> {
+              84,
               new[] { 0, 1, 2, 3, 4 },
               new[] { 0.02f, 1.0f, 0.42f },
               new[] { "a", "bb" },
               new object[] { new object[] { "First", 0x48 }, "Last" }
             };
             callback(parameters.AsReadOnly());
-          }
-        },
-        {
-          // I can refer to the Method3 like this as part of the field initializer because its static.
-          // If it wasn't then I'd have to add it later (e.g. as part of the constructor at the earliest).
-          "method3", Method3 
-        }
+          }),
+        // I can refer to the Method3 like this as part of the field initializer because its static.
+        // If it wasn't then I'd have to add it later (e.g. as part of the constructor at the earliest).
+        new MethodInfo("method3", ReturnType.Callback, Method3),
+        // Methods with Promise
+        new MethodInfo(
+          "method4", ReturnType.Promise,
+          (args, resolve, reject) => {
+            try
+            {
+              resolve(new object[] {true});
+            }
+            catch (Exception e)
+            {
+              reject(new object[] {"0x80000000", e.Message, e.StackTrace, e});
+            }
+          })
       };
 
-    public static void Method3(IReadOnlyList<object> args, MethodDelegate callback)
+    public static void Method3(IReadOnlyList<object> args, Callback callback, Callback ignored)
     {
       // At the moment the input args are packed into a single JSON-formatted string.
-      Debug.WriteLine($"SampleModule.method3({args})");
+      Debug.WriteLine($"SampleModule.method3({String.Join(", ", args)})");
 
       // Invoke the callback with some arguments. Using JSON isn't required.  We
       // could have used other basic types instead (e.g. int, double, float, bool,
@@ -68,22 +82,6 @@ namespace Playground
       // Simple... what goes in is what comes out.
       var json = Windows.Data.Json.JsonObject.Parse(text);
       callback(new[] { json });
-
     }
-
-    public IReadOnlyDictionary<string, MethodWithPromise> MethodsWithPromise { get; }
-      = new Dictionary<string, MethodWithPromise>() {
-        { "method4", (args, promise) => {
-            try
-            {
-              promise.Resolve(true);
-            }
-            catch (Exception e)
-            {
-              promise.Reject("0x80000000", e.Message, e.StackTrace, e);
-            }
-          }
-        }
-      };
   }
 }

@@ -1,22 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import "Promise.idl";
+import "MethodInfo.idl";
 
 namespace Microsoft.ReactNative.Bridge {
-
-  delegate void MethodDelegate(IVectorView<IInspectable> args);
-  delegate void MethodWithCallbackDelegate(IVectorView<IInspectable> args, MethodDelegate callback);
-  delegate void MethodWithPromise(IVectorView<IInspectable> args, Promise promise);
 
   [webhosthidden]
   interface INativeModule {
     String Name { get; };
-
     Windows.Foundation.Collections.IMapView<String, IInspectable> Constants { get; };
-    Windows.Foundation.Collections.IMapView<String, MethodDelegate> Methods { get; };
-    Windows.Foundation.Collections.IMapView<String, MethodWithCallbackDelegate> MethodsWithCallback { get; };
-    Windows.Foundation.Collections.IMapView<String, MethodWithPromise> MethodsWithPromise { get; };
+    Windows.Foundation.Collections.IVectorView<MethodInfo> Methods { get; };
   };
 
 } // namespace Microsoft.ReactNative

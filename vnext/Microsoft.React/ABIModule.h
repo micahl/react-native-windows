@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 #include "ReactSupport.h"
+#include "MethodInfo.h"
 #include <winrt/Microsoft.ReactNative.h>
 
 namespace winrt::Microsoft::ReactNative::Bridge {
@@ -35,10 +36,13 @@ class ABIModule : public facebook::xplat::module::CxxModule {
   // TODO: should implement a ConvertToIInspectable(folly::dynamic object) and use it
 
   facebook::xplat::module::CxxModule::Method
-  WrapMethodWithCallback(std::string methodName, MethodWithCallbackDelegate const& method);
+  WrapAction(hstring methodName, Bridge::Method const& method);
 
   facebook::xplat::module::CxxModule::Method
-  WrapMethodWithPromise(std::string methodName, MethodWithPromise const& method);
+  WrapCallback(hstring methodName, Bridge::Method const& method);
+
+  facebook::xplat::module::CxxModule::Method
+  WrapPromise(hstring methodName, Bridge::Method const& method);
 };
 
 } // namespace winrt::Microsoft::ReactNative::Bridge

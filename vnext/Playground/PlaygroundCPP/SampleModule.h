@@ -18,12 +18,11 @@ struct SampleModule
 
   void method3(
       IVectorView<IInspectable> const &args,
-      MethodDelegate const &callback);
+      Callback const &callback,
+      Callback const& /*ignored*/);
 
   hstring Name();
   IMapView<hstring, IInspectable> Constants();
-  IMapView<hstring, MethodDelegate> Methods();
-  IMapView<hstring, MethodWithCallbackDelegate> MethodsWithCallback();
-  IMapView<hstring, MethodWithPromise> MethodsWithPromise();
+  IVectorView<MethodInfo> Methods();
 };
 } // namespace winrt::Playground::implementation
