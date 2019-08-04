@@ -7,6 +7,8 @@
 #include "ReactInstanceManager.g.cpp"
 #endif
 
+#include "ReactInstanceCreator.h"
+
 #include <cxxreact/CxxModule.h>
 #include <cxxreact/Instance.h>
 #include <cxxreact/ModuleRegistry.h>
@@ -23,7 +25,7 @@ ReactInstanceManager::ReactInstanceManager(
     std::string jsMainModuleName,
     IVectorView<IReactPackage> &packages,
     bool useDeveloperSupport,
-    LifecycleState initialLifecycleState)
+    /*TODO*/LifecycleState initialLifecycleState)
     : m_instanceSettings(instanceSettings),
       m_jsBundleFile(jsBundleFile),
       m_jsMainModuleName(jsMainModuleName),
@@ -35,15 +37,13 @@ ReactInstanceManager::ReactInstanceManager(
 
   // TODO: Create a LifeCycleStateMachine to raise events in response
   // to events from the application and associate it with the ReactContext.
-  // Define the ILifecycleEventListener and add support to ReactContext to register
-  // a lifecycle listener.
-  // Define the IBackgroundEventListener and add support to ReactContext to register
-  // modules as background event listeners.
+  // Define the ILifecycleEventListener and add support to ReactContext to
+  // register a lifecycle listener. Define the IBackgroundEventListener and add
+  // support to ReactContext to register modules as background event listeners.
 }
 
 void ReactInstanceManager::OnSuspend() {
-  OutputDebugStringW(L"ReactInstanceManager::OnSuspend not implemented");
-  // throw hresult_not_implemented(L"ReactInstanceManager::OnSuspend");
+  OutputDebugStringW(L"TODO: ReactInstanceManager::OnSuspend not implemented");
 
   // DispatcherHelpers.AssertOnDispatcher();
 
@@ -61,7 +61,7 @@ void ReactInstanceManager::OnSuspend() {
 // Called when the host entered background mode.
 void ReactInstanceManager::OnEnteredBackground() {
   OutputDebugStringW(
-      L"ReactInstanceManager::OnEnteredBackground not implemented");
+      L"TODO: ReactInstanceManager::OnEnteredBackground not implemented");
   // throw
   // hresult_not_implemented(L"ReactInstanceManager::OnEnteredBackground");
 
@@ -72,9 +72,7 @@ void ReactInstanceManager::OnEnteredBackground() {
 // Called when the host is leaving background mode.
 void ReactInstanceManager::OnLeavingBackground() {
   OutputDebugStringW(
-      L"ReactInstanceManager::OnLeavingBackground not implemented");
-  // throw
-  // hresult_not_implemented(L"ReactInstanceManager::OnLeavingBackground");
+      L"TODO: ReactInstanceManager::OnLeavingBackground not implemented");
 
   // DispatcherHelpers.AssertOnDispatcher();
   //_lifecycleStateMachine.OnLeavingBackground();
@@ -82,17 +80,11 @@ void ReactInstanceManager::OnLeavingBackground() {
 
 // Used when the application resumes to reset the back button handling in
 // JavaScript.
-void ReactInstanceManager::OnResume(OnResumeAction const &action) {
-  // fire_and_forget action();
-  // action();
+void ReactInstanceManager::OnResume(OnResumeAction const &/*action*/) {
 
-  OutputDebugStringW(L"ReactInstanceManager::OnResume not implemented");
-  // throw hresult_not_implemented(L"ReactInstanceManager::OnResume");
+  OutputDebugStringW(L"TODO: ReactInstanceManager::OnResume not implemented");
 
   // see the ReactInstanceManager.cs from the C# implementation
-  // DispatcherHelpers.Initialize();
-  // DispatcherHelpers.AssertOnDispatcher();
-  // ReactChoreographer.Initialize();
 
   //_defaultBackButtonHandler = onBackPressed;
   //_suspendCancellation = new CancellationDisposable();
@@ -106,10 +98,7 @@ void ReactInstanceManager::OnResume(OnResumeAction const &action) {
 }
 
 void ReactInstanceManager::OnBackPressed() {
-  OutputDebugStringW(L"ReactInstanceManager::OnBackPressed not implemented");
-  // throw
-  // hresult_not_implemented(L"ReactInstanceManager.OnBackPressed");
-  // TODO
+  throw hresult_not_implemented(L"TODO: ReactInstanceManager::OnBackPressed not implemented");
 
   // DispatcherHelpers.AssertOnDispatcher();
   // var reactContext = _currentReactContext;
@@ -128,7 +117,7 @@ void ReactInstanceManager::OnBackPressed() {
 std::shared_ptr<react::uwp::IReactInstanceCreator>
 ReactInstanceManager::InstanceCreator() {
   if (m_reactInstanceCreator == nullptr) {
-     m_reactInstanceCreator = std::make_shared<ReactInstanceCreator>(
+    m_reactInstanceCreator = std::make_shared<ReactInstanceCreator>(
         m_instanceSettings,
         m_jsBundleFile,
         m_jsMainModuleName,
@@ -139,18 +128,20 @@ ReactInstanceManager::InstanceCreator() {
   return m_reactInstanceCreator;
 }
 
-auto ReactInstanceManager::GetOrCreateReactContext() -> ReactContext {
+auto ReactInstanceManager::GetOrCreateReactContextAsync()
+    -> IAsyncOperation<ReactContext> {
   if (m_currentReactContext != nullptr)
-    return m_currentReactContext;
+    co_return m_currentReactContext;
 
-  m_currentReactContext = CreateReactContextCore();
+  m_currentReactContext = co_await CreateReactContextCoreAsync();
 
-  return m_currentReactContext;
+  co_return m_currentReactContext;
 }
 
 // TODO: Should we make this method async?  On first run when getInstance
 // is called it starts things up. Does this need to block?
-auto ReactInstanceManager::CreateReactContextCore() -> ReactContext {
+auto ReactInstanceManager::CreateReactContextCoreAsync()
+    -> IAsyncOperation<ReactContext> {
   auto reactContext = ReactContext();
 
   /* TODO hook up an exception handler if UseDeveloperSupport is set
@@ -165,6 +156,7 @@ auto ReactInstanceManager::CreateReactContextCore() -> ReactContext {
   }
   */
 
+  auto moduleRegistryList = single_threaded_vector<NativeModuleBase>();
   if (m_modulesProvider == nullptr) {
     // equivalent to the C# NativeModulesRegistry
     m_modulesProvider = std::make_shared<NativeModulesProvider>();
@@ -177,7 +169,10 @@ auto ReactInstanceManager::CreateReactContextCore() -> ReactContext {
       auto modules = package.CreateNativeModules(reactContext);
       for (auto module : modules) {
         // TODO: Allow a module to override another if they conflict on name?
+        // Something that the registry would handle.  And should that inform
+        // which modules get iniitalized?
         m_modulesProvider->RegisterModule(module);
+        moduleRegistryList.Append(module);
       }
     }
   }
@@ -191,14 +186,26 @@ auto ReactInstanceManager::CreateReactContextCore() -> ReactContext {
     // rather than directly against facebook's types.
   }
 
+  // TODO: Could access to the module registry be easier if the ReactInstance
+  // implementation were lifted up into this project.
+
   auto instancePtr = InstanceCreator()->getInstance();
-  auto reactInstance =
-  winrt::make<Bridge::implementation::ReactInstance>(instancePtr);
+  auto reactInstance = winrt::make<Bridge::implementation::ReactInstance>(
+      instancePtr, moduleRegistryList.GetView());
 
   Bridge::implementation::ReactContext *contextImpl{
       get_self<Bridge::implementation::ReactContext>(reactContext)};
   contextImpl->InitializeWithInstance(reactInstance);
 
-  return reactContext;
+  // TODO: Investigate whether we need the equivalent of the
+  // LimitedConcurrencyActionQueue from the C# implementation that is used to
+  // sequence actions in order and ensure async continuations are performed on
+  // the same thread.  It's used as the type of queue for native modules.  It
+  // would be created before the instance and set as its queue configuration.
+  // It's then used by the instance internally as part of this InitializeAsync.
+
+  co_await reactInstance.InitializeAsync();
+
+  co_return reactContext;
 }
 } // namespace winrt::Microsoft::ReactNative::implementation

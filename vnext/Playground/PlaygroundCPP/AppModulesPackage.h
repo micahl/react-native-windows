@@ -14,7 +14,7 @@ namespace winrt::Playground::implementation {
 struct AppModulesPackage : AppModulesPackageT<AppModulesPackage> {
   AppModulesPackage() = default;
 
-  IVectorView<INativeModule> CreateNativeModules(ReactContext const &reactContext);
+  IVectorView<NativeModuleBase> CreateNativeModules(ReactContext const &reactContext);
 };
 } // namespace winrt::Playground::implementation
 

@@ -3,14 +3,25 @@
 
 #include "pch.h"
 #include "SampleModule.h"
+#if __has_include("SampleModule.g.cpp")
+#include "SampleModule.g.cpp"
+#endif
 #include <winrt\Windows.Data.Json.h>
 
 using namespace winrt;
 using namespace Microsoft::ReactNative;
+using namespace Microsoft::ReactNative::Bridge;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 
 namespace winrt::Playground::implementation {
+
+void SampleModule::Initialize() {
+  // TODO: Add support on ReactContext to register as an IBackgroundEventListener and/or
+  // ILifeCycleEventListener
+  OutputDebugStringW(L"Initializing\n");
+}
+
 hstring SampleModule::Name() {
   return L"SampleModule";
 }
@@ -23,16 +34,16 @@ IMapView<hstring, IInspectable> SampleModule::Constants() {
 
 IVectorView<MethodInfo> SampleModule::Methods() {
   auto delegates = single_threaded_vector<MethodInfo>(
-    { 
-      { L"method1", ReturnType::Void,
+      {{L"method1",
+        ReturnType::Void,
         [](IVectorView<IInspectable> const & /*ignored*/,
            Callback const & /*ignored*/,
            Callback const & /*ignored*/) {
           // no op
           OutputDebugStringW(L"SampleModule.method1()\n");
-        }
-      },
-      { L"method2", ReturnType::Callback,
+        }},
+       {L"method2",
+        ReturnType::Callback,
         [](IVectorView<IInspectable> const & /*ignored*/,
            Callback const &callback,
            Callback const & /*ignored*/) {
@@ -49,9 +60,9 @@ IVectorView<MethodInfo> SampleModule::Methods() {
 
           auto stringArray = PropertyValue::CreateStringArray({L"a", L"bb"});
 
-          auto mixedArray = PropertyValue::CreateInspectableArray(
-              std::array<IInspectable, 2>{box_value(L"First"),
-                                          box_value(0x48)});
+          auto mixedArray =
+              PropertyValue::CreateInspectableArray(std::array<IInspectable, 2>{
+                  box_value(L"First"), box_value(0x48)});
 
           auto nestedArray = PropertyValue::CreateInspectableArray(
               std::array<IInspectable, 2>{mixedArray, box_value(L"Last")});
@@ -64,12 +75,10 @@ IVectorView<MethodInfo> SampleModule::Methods() {
                                                     nestedArray});
 
           callback(callbackArgs.GetView());
-        }
-      },
-      { L"method3", ReturnType::Callback,
-        Method(this, &SampleModule::method3)
-      },
-      { L"method4", ReturnType::Promise,
+        }},
+       {L"method3", ReturnType::Callback, Method(this, &SampleModule::method3)},
+       {L"method4",
+        ReturnType::Promise,
         [](IVectorView<IInspectable> const & /*ignored*/,
            Callback const &resolve,
            Callback const &reject /*Promise const &promise*/) {
@@ -82,9 +91,7 @@ IVectorView<MethodInfo> SampleModule::Methods() {
                     box_value(what),
                     box_value(L"stack trace goes here")});
           }
-        }
-      }
-    });
+        }}});
 
   return delegates.GetView();
 }

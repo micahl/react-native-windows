@@ -16,11 +16,10 @@ using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 
 namespace winrt::Playground::implementation {
-IVectorView<INativeModule> AppModulesPackage::CreateNativeModules(
+IVectorView<Bridge::NativeModuleBase> AppModulesPackage::CreateNativeModules(
     ReactContext const &reactContext) {
-  auto modules = single_threaded_vector<INativeModule>({
-      winrt::make<SampleModule>(),
-  });
+  auto modules =
+      single_threaded_vector<Bridge::NativeModuleBase>({make<SampleModule>()});
 
   return modules.GetView();
 }

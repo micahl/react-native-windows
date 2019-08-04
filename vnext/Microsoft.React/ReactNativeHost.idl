@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import "IReactPackage.idl";
-import "INativeModule.idl";
+import "NativeModuleBase.idl";
 import "ReactInstanceManager.idl";
 import "ReactInstanceSettings.idl";
 import "ReactRootView.idl";
@@ -19,6 +19,7 @@ namespace Microsoft.ReactNative
     ReactNativeHost();
 
     ReactInstanceManager ReactInstanceManager{ get; };
+    ReactInstanceSettings InstanceSettings { get; };
 
     Boolean HasInstance{ get; };
 
@@ -28,8 +29,6 @@ namespace Microsoft.ReactNative
     overridable Boolean UseDeveloperSupport{ get; };
     overridable String JavaScriptMainModuleName{ get; };
     overridable String JavaScriptBundleFile{ get; };
-
-    overridable Microsoft.ReactNative.ReactInstanceSettings InstanceSettings { get; };
 
     Windows.UI.Xaml.UIElement GetOrCreateRootView(IInspectable initialProps);
 

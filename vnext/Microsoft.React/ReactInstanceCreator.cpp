@@ -2,15 +2,13 @@
 // Licensed under the MIT License.
 
 #include "pch.h"
-#include "ReactInit.h"
+#include "ReactInstanceCreator.h"
 #include <ReactUWP/ReactUwp.h>
 
 using namespace winrt;
 
 namespace winrt::Microsoft::ReactNative::implementation {
-/*-------------------------------------------------------------------------------
-        winrt::Microsoft::ReactNative::implementation::InitReactNative
--------------------------------------------------------------------------------*/
+
 void InitReactNative() {
 #if _DEBUG
   facebook::react::InitializeLogging(
@@ -32,12 +30,16 @@ ReactInstanceCreator::ReactInstanceCreator(
       m_jsMainModuleName(jsMainModuleName),
       m_modulesProvider(modulesProvider),
       m_viewManagersProvider(viewManagersProvider) {
+  if (instanceSettings == nullptr) {
+    throw hresult_null_argument(L"instanceSettings");
+  }
+
   if (modulesProvider == nullptr) {
-    throw winrt::hresult_null_argument(L"modulesProvider");
+    throw hresult_null_argument(L"modulesProvider");
   }
 
   if (viewManagersProvider == nullptr) {
-    throw winrt::hresult_null_argument(L"viewManagersProvider");
+    throw hresult_null_argument(L"viewManagersProvider");
   }
 }
 
@@ -75,6 +77,9 @@ ReactInstanceCreator::getInstance() {
   reactInstance->loadBundle(std::move(m_jsBundleFile));
 
   m_instance = reactInstance;
+
+  InitReactNative();
+
   return m_instance;
 }
 

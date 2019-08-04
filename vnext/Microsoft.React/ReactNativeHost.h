@@ -13,9 +13,9 @@
 #include <ReactUWP/ReactUwp.h>
 
 using namespace winrt;
-using namespace winrt::Microsoft::ReactNative;
-using namespace winrt::Microsoft::ReactNative::Bridge;
-using namespace winrt::Windows::Foundation::Collections;
+using namespace Microsoft::ReactNative;
+using namespace Microsoft::ReactNative::Bridge;
+using namespace Windows::Foundation::Collections;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 
@@ -24,7 +24,8 @@ struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
 
   UIElement GetOrCreateRootView(IInspectable initialProps);
 
-  winrt::Microsoft::ReactNative::ReactInstanceManager ReactInstanceManager();
+  Microsoft::ReactNative::ReactInstanceManager ReactInstanceManager();
+  Microsoft::ReactNative::ReactInstanceSettings InstanceSettings();
 
   void OnSuspend();
   void OnEnteredBackground();
@@ -36,8 +37,6 @@ struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
   virtual hstring JavaScriptBundleFile();
   virtual bool UseDeveloperSupport();
   virtual IVectorView<IReactPackage> Packages();
-
-  virtual winrt::Microsoft::ReactNative::ReactInstanceSettings InstanceSettings();
 
   bool HasInstance() {
     return m_reactInstanceManager != nullptr;
@@ -56,24 +55,21 @@ struct ReactNativeHost : ReactNativeHostT<ReactNativeHost> {
     return overridable().UseDeveloperSupport();
   }
 
-  winrt::Microsoft::ReactNative::ReactInstanceSettings get_InstanceSettings() {
-    return overridable().InstanceSettings();
-  }
-
   IVectorView<IReactPackage> get_Packages() {
     return overridable().Packages();
   }
 
  private:
-  winrt::Microsoft::ReactNative::ReactInstanceManager m_reactInstanceManager{
+  Microsoft::ReactNative::ReactInstanceSettings m_instanceSettings;
+  Microsoft::ReactNative::ReactInstanceManager m_reactInstanceManager{
       nullptr};
-  winrt::hstring m_mainComponentName{};
-  winrt::hstring m_javascriptMainModuleName{};
+  hstring m_mainComponentName{};
+  hstring m_javascriptMainModuleName{};
 
   std::shared_ptr<ReactRootView> m_reactRootView{nullptr};
 
   void Init();
-  winrt::Microsoft::ReactNative::ReactInstanceManager
+  Microsoft::ReactNative::ReactInstanceManager
   CreateReactInstanceManager();
   std::shared_ptr<ReactRootView> CreateRootView();
 };

@@ -5,7 +5,6 @@
 #include "ReactNativeHost.h"
 #include "ReactNativeHost.g.cpp"
 
-#include "ReactInit.h"
 #include "ReactInstanceManager.h"
 #include "ReactInstanceManagerBuilder.h"
 #include "ReactInstanceSettings.h"
@@ -25,7 +24,7 @@ ReactNativeHost::ReactNativeHost() {
   Init();
 }
 
-winrt::Microsoft::ReactNative::ReactInstanceManager
+Microsoft::ReactNative::ReactInstanceManager
 ReactNativeHost::ReactInstanceManager() {
   if (m_reactInstanceManager == nullptr) {
     m_reactInstanceManager = CreateReactInstanceManager();
@@ -45,7 +44,7 @@ UIElement ReactNativeHost::GetOrCreateRootView(IInspectable initialProps) {
   assert(m_reactRootView != nullptr);
 
   m_reactRootView->OnCreate(*this);
-  m_reactRootView->StartReactApplication(
+  m_reactRootView->StartReactApplicationAsync(
       ReactInstanceManager(), get_MainComponentName(), props);
 
   return *m_reactRootView;
@@ -77,12 +76,12 @@ void ReactNativeHost::OnResume(
 }
 
 hstring ReactNativeHost::MainComponentName() {
-  throw winrt::hresult_not_implemented(
+  throw hresult_not_implemented(
       L"Must implement ReactNativeHost.MainComponentName.");
 }
 
 hstring ReactNativeHost::JavaScriptMainModuleName() {
-  throw winrt::hresult_not_implemented(
+  throw hresult_not_implemented(
       L"Must implement ReactNativeHost.JavaScriptMainModuleName.");
 }
 
@@ -102,9 +101,12 @@ auto ReactNativeHost::Packages() -> IVectorView<IReactPackage> {
   return single_threaded_vector<IReactPackage>().GetView();
 }
 auto ReactNativeHost::InstanceSettings()
-    -> winrt::Microsoft::ReactNative::ReactInstanceSettings {
+    -> Microsoft::ReactNative::ReactInstanceSettings {
   // Return the default
-  return winrt::make<ReactInstanceSettings>();
+  if (m_instanceSettings == nullptr)
+    m_instanceSettings = make<ReactInstanceSettings>();
+
+  return m_instanceSettings;
 }
 
 void ReactNativeHost::Init() {
@@ -117,10 +119,10 @@ void ReactNativeHost::Init() {
 #endif
 }
 
-winrt::Microsoft::ReactNative::ReactInstanceManager
+Microsoft::ReactNative::ReactInstanceManager
 ReactNativeHost::CreateReactInstanceManager() {
   auto builder = ReactInstanceManagerBuilder();
-  builder.InstanceSettings(get_InstanceSettings());
+  builder.InstanceSettings(InstanceSettings());
   builder.UseDeveloperSupport(UseDeveloperSupport());
   builder.InitialLifecycleState(LifecycleState::BeforeCreate);
   builder.JavaScriptBundleFile(get_JavaScriptBundleFile());

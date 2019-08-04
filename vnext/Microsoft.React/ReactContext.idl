@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 import "ReactInstance.idl";
-import "INativeModule.idl";
 
 namespace Microsoft.ReactNative.Bridge
 {

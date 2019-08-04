@@ -13,39 +13,41 @@
 #include <ReactUWP/IXamlRootView.h>
 #include <ReactUWP/ReactUwp.h>
 
+using namespace winrt;
+using namespace Windows::UI::Core;
+
 namespace winrt::Microsoft::ReactNative::implementation {
-// std::shared_ptr<react::uwp::IXamlRootView>
-// StartReactApplication(
-//	Windows::UI::Xaml::Controls::Grid const& grid,
-//	ReactNativeHost host,
-//	const std::shared_ptr<react::uwp::IReactInstanceCreator>&
-//instanceCreator, 	folly::dynamic initialProps);
+
+static bool s_isShiftKeyDown;
+static bool s_isControlKeyDown;
 
 struct ReactRootView : ReactRootViewT<ReactRootView> {
   ReactRootView() = default;
 
-  void OnCreate(winrt::Microsoft::ReactNative::ReactNativeHost const &host);
-  void StartReactApplication(
-      winrt::Microsoft::ReactNative::ReactInstanceManager const
+  void OnCreate(ReactNative::ReactNativeHost const &host);
+  fire_and_forget StartReactApplicationAsync(
+      ReactNative::ReactInstanceManager const
           &instanceManager,
-      winrt::hstring componentName,
+      hstring componentName,
       folly::dynamic initialProps);
 
  private:
   std::shared_ptr<react::uwp::IXamlRootView> m_xamlView;
-  winrt::hstring m_moduleName{};
+  hstring m_moduleName{};
   folly::dynamic m_initialProps{};
-  winrt::Microsoft::ReactNative::ReactInstanceManager m_reactInstanceManager{};
+  ReactNative::ReactInstanceManager m_reactInstanceManager{nullptr};
 
   static void OnBackRequested(
-      winrt::Microsoft::ReactNative::ReactNativeHost const &host,
-      IInspectable sender,
-      winrt::Windows::UI::Core::BackRequestedEventArgs e);
+      ReactNative::ReactNativeHost const &host,
+      IInspectable const& sender,
+      BackRequestedEventArgs const& e);
 
-  // IAsyncAction StartReactApplicationAsync(
-  //	ReactInstanceManager const& instanceManager,
-  //	winrt::hstring componentName,
-  //	folly::dynamic initialProps);
+  static void OnAcceleratorKeyActivated(
+      ReactNative::ReactNativeHost const &host,
+      CoreDispatcher const& sender,
+      AcceleratorKeyEventArgs const &e);
+
+  static bool IsKeyDown(CoreAcceleratorKeyEventType t);
 };
 } // namespace winrt::Microsoft::ReactNative::implementation
 

@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import "INativeModule.idl";
+import "NativeModuleBase.idl";
 import "ReactContext.idl";
 
 namespace Microsoft.ReactNative.Bridge {
   [webhosthidden]
   interface IReactPackage {
-    IVectorView<Microsoft.ReactNative.Bridge.INativeModule> CreateNativeModules(Microsoft.ReactNative.Bridge.ReactContext reactContext);
+    IVectorView<Microsoft.ReactNative.Bridge.NativeModuleBase> CreateNativeModules(Microsoft.ReactNative.Bridge.ReactContext reactContext);
   };
 }

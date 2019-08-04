@@ -5,9 +5,10 @@
 #include "ReactApplicationDelegate.g.h"
 #include "ReactApplication.h"
 
-using namespace winrt::Windows::UI::Xaml;
-using namespace winrt::Windows::ApplicationModel;
-using namespace winrt::Windows::ApplicationModel::Activation;
+using namespace winrt;
+using namespace Windows::UI::Xaml;
+using namespace Windows::ApplicationModel;
+using namespace Windows::ApplicationModel::Activation;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 struct ReactApplicationDelegate

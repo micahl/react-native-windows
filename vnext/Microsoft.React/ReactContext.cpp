@@ -10,7 +10,8 @@
 //#include "ABIModule.h"
 
 using namespace winrt;
-using namespace winrt::Microsoft::ReactNative::Bridge;
+using namespace Microsoft::ReactNative::Bridge;
+using namespace Windows::Foundation::Collections;
 
 namespace winrt::Microsoft::ReactNative::Bridge::implementation {
 IReactInstance ReactContext::ReactInstance() {

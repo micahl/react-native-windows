@@ -3,9 +3,9 @@
 
 namespace Playground
 {
-	[default_interface]
-  runtimeclass MainReactNativeHost : Microsoft.ReactNative.ReactNativeHost
+  [default_interface]
+  runtimeclass SampleModule : Microsoft.ReactNative.Bridge.NativeModuleBase
   {
-    MainReactNativeHost();
+    SampleModule();
   }
 }

@@ -7,9 +7,10 @@
 #include <folly/dynamic.h>
 #include <folly/json.h>
 
+using namespace winrt;
+using namespace Windows::Foundation;
+
 namespace winrt::Microsoft::ReactNative::Bridge {
-  using namespace winrt;
-  using namespace winrt::Windows::Foundation;
 
 // Convert a WinRT IInspectable into a folly::dynamic object
 folly::dynamic ConvertToDynamic(IInspectable const &object);

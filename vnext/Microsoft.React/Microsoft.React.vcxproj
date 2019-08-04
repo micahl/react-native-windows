@@ -82,7 +82,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level4</WarningLevel>
-      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AdditionalOptions>/await %(AdditionalOptions) /bigobj</AdditionalOptions>
       <!--Temporarily disable cppwinrt heap enforcement to work around xaml compiler generated std::shared_ptr use -->
       <AdditionalOptions Condition="'$(CppWinRTHeapEnforcement)'==''">/DWINRT_NO_MAKE_DETECTION %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;4800;28204;4146;%(DisableSpecificWarnings)</DisableSpecificWarnings>
@@ -121,6 +121,14 @@
       <DependentUpon>MethodInfo.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="NativeModuleBase.h">
+      <DependentUpon>NativeModuleBase.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="NativeModuleRegistry.h">
+      <DependentUpon>NativeModuleRegistry.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="NativeModulesProvider.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ReactApplication.h">
@@ -134,7 +142,7 @@
       <DependentUpon>ReactContext.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="ReactInit.h" />
+    <ClInclude Include="ReactInstanceCreator.h" />
     <ClInclude Include="ReactInstance.h">
       <DependentUpon>ReactInstance.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -165,6 +173,14 @@
       <DependentUpon>MethodInfo.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="NativeModuleBase.cpp">
+      <DependentUpon>NativeModuleBase.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="NativeModuleRegistry.cpp">
+      <DependentUpon>NativeModuleRegistry.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="NativeModulesProvider.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -181,7 +197,7 @@
       <DependentUpon>ReactContext.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
-    <ClCompile Include="ReactInit.cpp" />
+    <ClCompile Include="ReactInstanceCreator.cpp" />
     <ClCompile Include="ReactInstance.cpp">
       <DependentUpon>ReactInstance.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -207,9 +223,16 @@
     <ClCompile Include="ViewManagersProvider.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="INativeModule.idl" />
+    <Midl Include="IBackgroundEventListener.idl" />
+    <Midl Include="ILifecycleEventListener.idl" />
     <Midl Include="IReactPackage.idl" />
     <Midl Include="MethodInfo.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="NativeModuleBase.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="NativeModuleRegistry.idl">
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="ReactApplication.idl" />

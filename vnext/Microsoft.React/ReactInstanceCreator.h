@@ -11,8 +11,8 @@
 #include <winrt/Microsoft.ReactNative.h>
 
 using namespace winrt;
-using namespace winrt::Microsoft::ReactNative;
-using namespace winrt::Microsoft::ReactNative::Bridge;
+using namespace Microsoft::ReactNative;
+using namespace Microsoft::ReactNative::Bridge;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 void InitReactNative();

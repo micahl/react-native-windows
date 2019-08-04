@@ -13,6 +13,15 @@ namespace Playground
 {
   sealed class MainReactNativeHost : ReactNativeHost
   {
+    public MainReactNativeHost()
+    {
+#if DEBUG
+      this.InstanceSettings.UseWebDebugger = true;
+      this.InstanceSettings.UseLiveReload = true;
+#endif
+      this.InstanceSettings.UseJsi = true;
+    }
+
     protected override string MainComponentName => "Playground";
     protected override string JavaScriptMainModuleName => "Playground/index.uwp";
     protected override IReadOnlyList<IReactPackage> Packages
@@ -22,14 +31,5 @@ namespace Playground
         return new[] { new AppModulesPackage() };
       }
     }
-
-    protected override ReactInstanceSettings InstanceSettings => new ReactInstanceSettings()
-    {
-#if DEBUG
-      UseWebDebugger = true,
-      UseLiveReload = true,
-#endif
-      UseJsi = true,
-    };
   }
 }

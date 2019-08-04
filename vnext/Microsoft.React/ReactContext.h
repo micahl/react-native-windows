@@ -7,6 +7,7 @@
 #include "ReactInstance.h"
 
 using namespace winrt;
+using namespace Windows::Foundation::Collections;
 
 namespace winrt::Microsoft::ReactNative::Bridge::implementation {
 struct ReactContext : ReactContextT<ReactContext> {

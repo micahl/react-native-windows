@@ -8,22 +8,26 @@
 #include <winrt/Windows.ApplicationModel.Activation.h>
 #include <winrt/Windows.UI.Core.h>
 
+using namespace winrt;
+using namespace Windows::ApplicationModel;
+using namespace Windows::UI::Xaml::Navigation;
+
 namespace winrt::Microsoft::ReactNative::implementation {
 struct ReactApplication : ReactApplicationT<ReactApplication> {
   ReactApplication();
 
-  winrt::Microsoft::ReactNative::ReactNativeHost Host();
+  Microsoft::ReactNative::ReactNativeHost Host();
 
-  virtual winrt::Microsoft::ReactNative::ReactNativeHost HostCore();
+  virtual Microsoft::ReactNative::ReactNativeHost HostCore();
 
-  virtual void OnLaunched(
-      Windows::ApplicationModel::Activation::LaunchActivatedEventArgs const &);
-  virtual void OnSuspending(
-      IInspectable const &,
-      Windows::ApplicationModel::SuspendingEventArgs const &);
-  virtual void OnNavigationFailed(
-      IInspectable const &,
-      Windows::UI::Xaml::Navigation::NavigationFailedEventArgs const &);
+  virtual void
+  OnLaunched(Activation::LaunchActivatedEventArgs const &);
+
+  virtual void
+  OnSuspending(IInspectable const &, SuspendingEventArgs const &);
+
+  virtual void
+  OnNavigationFailed(IInspectable const &, NavigationFailedEventArgs const &);
 
  protected:
   virtual winrt::Microsoft::ReactNative::
@@ -32,11 +36,11 @@ struct ReactApplication : ReactApplicationT<ReactApplication> {
   }
 
  private:
-  winrt::Microsoft::ReactNative::ReactNativeHost m_host{nullptr};
-  winrt::Microsoft::ReactNative::ReactApplicationDelegate m_delegate{nullptr};
+  Microsoft::ReactNative::ReactNativeHost m_host{nullptr};
+  Microsoft::ReactNative::ReactApplicationDelegate m_delegate{nullptr};
 
   void OnCreate(
-      Windows::ApplicationModel::Activation::LaunchActivatedEventArgs const &e);
+      Activation::LaunchActivatedEventArgs const &e);
 };
 } // namespace winrt::Microsoft::ReactNative::implementation
 

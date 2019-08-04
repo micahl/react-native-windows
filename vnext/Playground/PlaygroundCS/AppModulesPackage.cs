@@ -13,9 +13,9 @@ namespace Playground
 {
   sealed class AppModulesPackage : IReactPackage
   {
-    public IReadOnlyList<INativeModule> CreateNativeModules(ReactContext reactContext)
+    public IReadOnlyList<NativeModuleBase> CreateNativeModules(ReactContext reactContext)
     {
-      return new List<INativeModule>() { new SampleModule() };
+      return new List<NativeModuleBase>() { new SampleModule() };
     }
   }
 }

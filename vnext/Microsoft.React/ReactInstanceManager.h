@@ -7,19 +7,18 @@
 #include "LifecycleState.h"
 #include "NativeModulesProvider.h"
 #include "ReactContext.h"
-#include "ReactInit.h"
 #include "ReactInstanceSettings.h"
 #include "ViewManagersProvider.h"
 
 #include <ReactUWP/IReactInstance.h>
 #include <ReactUWP/ReactUwp.h>
 
-namespace winrt::Microsoft::ReactNative::implementation {
 using namespace winrt;
-using namespace Microsoft::ReactNative;
 using namespace Microsoft::ReactNative::Bridge;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+
+namespace winrt::Microsoft::ReactNative::implementation {
 
 struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   ReactInstanceManager() = default;
@@ -31,7 +30,7 @@ struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
       bool useDeveloperSupport,
       LifecycleState initialLifecycleState);
 
-  ReactContext GetOrCreateReactContext();
+  IAsyncOperation<ReactContext> GetOrCreateReactContextAsync();
   ReactContext CurrentReactContext() {
     return m_currentReactContext;
   }
@@ -57,7 +56,7 @@ struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   std::string m_jsBundleFile{};
   std::string m_jsMainModuleName{};
   IVectorView<IReactPackage> m_packages;
-  bool m_useDeveloperSupport;
+  bool m_useDeveloperSupport{false};
   std::shared_ptr<NativeModulesProvider> m_modulesProvider{nullptr};
   std::shared_ptr<ViewManagersProvider> m_viewManagersProvider{nullptr};
 
@@ -67,7 +66,7 @@ struct ReactInstanceManager : ReactInstanceManagerT<ReactInstanceManager> {
   std::shared_ptr<react::uwp::IReactInstanceCreator> m_reactInstanceCreator{
       nullptr};
 
-  ReactContext CreateReactContextCore();
+  IAsyncOperation<ReactContext> CreateReactContextCoreAsync();
 };
 } // namespace winrt::Microsoft::ReactNative::implementation
 

@@ -2,27 +2,31 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-#include "winrt\Microsoft.ReactNative.Bridge.h"
-
-namespace winrt::Playground::implementation {
+#include "SampleModule.g.h"
 
 using namespace winrt;
 using namespace Microsoft::ReactNative;
-using namespace Microsoft::ReactNative::Bridge;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 
-struct SampleModule
-    : implements<SampleModule, Microsoft::ReactNative::Bridge::INativeModule> {
+namespace winrt::Playground::implementation {
+
+struct SampleModule : SampleModuleT<SampleModule> {
   SampleModule() = default;
 
   void method3(
       IVectorView<IInspectable> const &args,
-      Callback const &callback,
-      Callback const& /*ignored*/);
+      Bridge::Callback const &callback,
+      Bridge::Callback const & /*ignored*/);
 
   hstring Name();
   IMapView<hstring, IInspectable> Constants();
-  IVectorView<MethodInfo> Methods();
+  IVectorView<Bridge::MethodInfo> Methods();
+  void Initialize();
 };
 } // namespace winrt::Playground::implementation
+
+namespace winrt::Playground::factory_implementation {
+struct SampleModule
+    : SampleModuleT<SampleModule, implementation::SampleModule> {};
+} // namespace winrt::Playground::factory_implementation

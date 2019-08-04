@@ -6,10 +6,10 @@
 #if __has_include("ReactApplication.g.cpp")
 #include "ReactApplication.g.cpp"
 #endif
-#include "ReactInit.h"
 #include "ReactNativeHost.h"
 
 using namespace winrt;
+using namespace Microsoft::ReactNative;
 using namespace Windows::ApplicationModel;
 using namespace Windows::ApplicationModel::Activation;
 using namespace Windows::Foundation;
@@ -17,8 +17,6 @@ using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
-
-using namespace winrt::Microsoft::ReactNative;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 ReactApplication::ReactApplication()
@@ -37,7 +35,7 @@ ReactApplication::ReactApplication()
 #endif
 }
 
-winrt::Microsoft::ReactNative::ReactNativeHost ReactApplication::Host() {
+Microsoft::ReactNative::ReactNativeHost ReactApplication::Host() {
   if (m_host == nullptr) {
     m_host = overridable().HostCore();
   }
@@ -45,9 +43,9 @@ winrt::Microsoft::ReactNative::ReactNativeHost ReactApplication::Host() {
   return m_host;
 }
 
-winrt::Microsoft::ReactNative::ReactNativeHost ReactApplication::HostCore() {
-  throw winrt::hresult_not_implemented(
-      L"ReactApplication.HostCore is not implemented");
+Microsoft::ReactNative::ReactNativeHost ReactApplication::HostCore() {
+  throw hresult_not_implemented(
+      L"You must implement ReactApplication.HostCore.");
 }
 
 void ReactApplication::OnLaunched(LaunchActivatedEventArgs const &e) {

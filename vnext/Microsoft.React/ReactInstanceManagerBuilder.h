@@ -6,11 +6,8 @@
 #include "ReactInstanceManager.h"
 #include "ReactInstanceSettings.h"
 
-#include <ReactUWP/IReactInstance.h>
-#include <winrt/microsoft.reactnative.h>
-
 using namespace winrt;
-using namespace winrt::Microsoft::ReactNative;
+using namespace Microsoft::ReactNative;
 
 namespace winrt::Microsoft::ReactNative::implementation {
 class ReactInstanceManagerBuilder {
@@ -46,7 +43,7 @@ class ReactInstanceManagerBuilder {
 
  private:
   Windows::Foundation::Collections::IVectorView<IReactPackage> m_packages;
-  Microsoft::ReactNative::ReactInstanceSettings m_instanceSettings;
+  Microsoft::ReactNative::ReactInstanceSettings m_instanceSettings{nullptr};
   std::wstring m_jsBundleFile{};
   std::wstring m_jsMainModuleName{};
   bool m_useDeveloperSupport{false};

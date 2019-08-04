@@ -11,7 +11,14 @@ using namespace Windows::Foundation::Collections;
 
 namespace winrt::Playground::implementation {
 struct MainReactNativeHost : MainReactNativeHostT<MainReactNativeHost> {
-  MainReactNativeHost() = default;
+  MainReactNativeHost(){
+    auto instanceSettings = InstanceSettings();
+#if DEBUG
+    instanceSettings.UseLiveReload(true); // true by default in debug builds already
+    instanceSettings.UseWebDebugger(true); // true by default in debug builds already
+#endif
+    instanceSettings.UseJsi(true);
+  };
 
   hstring MainComponentName() {
     return L"Playground";
@@ -26,15 +33,6 @@ struct MainReactNativeHost : MainReactNativeHostT<MainReactNativeHost> {
     auto packages = single_threaded_vector<IReactPackage>(
         {winrt::make<AppModulesPackage>()});
     return packages.GetView();
-  };
-  ReactInstanceSettings InstanceSettings() {
-    auto settings = ReactInstanceSettings();
-#if DEBUG
-    settings.UseLiveReload(true); // true by default in debug builds already
-    settings.UseWebDebugger(true); // true by default in debug builds already
-#endif
-    settings.UseJsi(true);
-    return settings;
   };
 };
 } // namespace winrt::Playground::implementation

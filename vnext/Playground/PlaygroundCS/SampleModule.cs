@@ -10,17 +10,17 @@ using System.Diagnostics;
 
 namespace Playground
 {
-  public class SampleModule : INativeModule
+  public class SampleModule : NativeModuleBase
   {
-    public string Name => nameof(SampleModule);
+    protected override string Name => nameof(SampleModule);
 
-    public IReadOnlyDictionary<string, object> Constants { get; }
+    protected override IReadOnlyDictionary<string, object> Constants { get; }
       = new Dictionary<string, object>()
     {
       { "a", "\"b\"" },
     };
 
-    public IReadOnlyList<MethodInfo> Methods { get; }
+    protected override IReadOnlyList<MethodInfo> Methods { get; }
       = new List<MethodInfo>()
       {
         // Fire and forget Actions
@@ -82,6 +82,11 @@ namespace Playground
       // Simple... what goes in is what comes out.
       var json = Windows.Data.Json.JsonObject.Parse(text);
       callback(new[] { json });
+    }
+
+    protected override void Initialize()
+    {
+      Debug.WriteLine("Initialized");
     }
   }
 }

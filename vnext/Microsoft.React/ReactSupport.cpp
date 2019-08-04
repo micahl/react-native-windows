@@ -2,10 +2,11 @@
 #include "pch.h"
 #include "ReactSupport.h"
 
-namespace winrt::Microsoft::ReactNative::Bridge {
 using namespace winrt;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+
+namespace winrt::Microsoft::ReactNative::Bridge {
 
 folly::dynamic ConvertToDynamic(IInspectable const &object) {
   if (object == nullptr)

@@ -2,14 +2,14 @@
 // Licensed under the MIT License.
 
 #include "pch.h"
-#include "ABIModule.h"
 #include "NativeModulesProvider.h"
+#include "ABIModule.h"
 
 #include <ReactUWP/ReactUwp.h>
 #include <folly/json.h>
-#include <windows.foundation.h>
-#include "winrt/Windows.Foundation.Collections.h"
-#include "winrt/Windows.Foundation.h"
+
+using namespace winrt;
+using namespace Windows::Foundation;
 
 namespace winrt::Microsoft::ReactNative::Bridge {
 /*-------------------------------------------------------------------------------
@@ -35,11 +35,12 @@ NativeModulesProvider::GetModules(
 }
 
 void NativeModulesProvider::RegisterModule(
-    winrt::Microsoft::ReactNative::Bridge::INativeModule const &module) {
-  // TODO: This is taking a naive approach right now and just adding everything.
-  // Consider whether to add the CanOverrideExistingModule on INativeModule and
-  // then check it here to see whether a module being registered is allowed to
-  // take precedence over one that was already registered.
+    winrt::Microsoft::ReactNative::Bridge::NativeModuleBase const &module) {
+  // TODO: This is taking a naive approach right now and just adding
+  // everything. Consider whether to add the CanOverrideExistingModule on
+  // NativeModuleBase and then check it here to see whether a module being
+  // registered is allowed to take precedence over one that was already
+  // registered.
   m_modules.push_back(module);
 }
 
