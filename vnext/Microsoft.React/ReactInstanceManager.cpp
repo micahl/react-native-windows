@@ -62,8 +62,6 @@ void ReactInstanceManager::OnSuspend() {
 void ReactInstanceManager::OnEnteredBackground() {
   OutputDebugStringW(
       L"TODO: ReactInstanceManager::OnEnteredBackground not implemented");
-  // throw
-  // hresult_not_implemented(L"ReactInstanceManager::OnEnteredBackground");
 
   // DispatcherHelpers.AssertOnDispatcher();
   //_lifecycleStateMachine.OnEnteredBackground();
@@ -158,7 +156,6 @@ auto ReactInstanceManager::CreateReactContextCoreAsync()
 
   auto moduleRegistryList = single_threaded_vector<NativeModuleBase>();
   if (m_modulesProvider == nullptr) {
-    // equivalent to the C# NativeModulesRegistry
     m_modulesProvider = std::make_shared<NativeModulesProvider>();
 
     // TODO: Define a CoreModulesPackage, load it here.

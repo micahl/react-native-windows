@@ -87,4 +87,9 @@ void ReactInstanceCreator::markAsNeedsReload() {
   m_instance->SetAsNeedsReload();
   m_instance = nullptr;
 }
+
+
+void persistUseWebDebugger(bool useWebDebugger) {
+
+}
 } // namespace winrt::Microsoft::ReactNative::implementation

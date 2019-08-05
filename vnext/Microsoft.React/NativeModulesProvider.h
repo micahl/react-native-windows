@@ -24,5 +24,6 @@ class NativeModulesProvider final
 
  private:
   std::vector<NativeModuleBase> m_modules;
+  std::shared_ptr<facebook::react::MessageQueueThread> m_modulesWorkerQueue{nullptr};
 };
 } // namespace winrt::Microsoft::ReactNative::Bridge::implementation

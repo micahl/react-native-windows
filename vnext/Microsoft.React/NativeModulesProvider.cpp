@@ -16,19 +16,25 @@ namespace winrt::Microsoft::ReactNative::Bridge {
   NativeModulesProvider::GetModules
 -------------------------------------------------------------------------------*/
 std::vector<facebook::react::NativeModuleDescription>
-NativeModulesProvider::GetModules(
-    const std::shared_ptr<facebook::react::MessageQueueThread>
-        &defaultQueueThread) {
-  std::shared_ptr<facebook::react::MessageQueueThread> queueThread(
-      defaultQueueThread);
+NativeModulesProvider::GetModules(std::shared_ptr<facebook::react::MessageQueueThread>
+        const& /*defaultQueueThread*/) {
+
+  //std::shared_ptr<facebook::react::MessageQueueThread> queueThread(defaultQueueThread);
   std::vector<facebook::react::NativeModuleDescription> modules;
   modules.reserve(m_modules.size());
+
+  if (m_modulesWorkerQueue == nullptr) {
+    // TODO: The queue provided is the UIMessageQueueThread which isn't needed
+    // for native modules. As a workaround for now let's just use a new worker
+    // message queue.
+    m_modulesWorkerQueue = react::uwp::CreateWorkerMessageQueue();
+  }
 
   for (auto module : m_modules) {
     modules.emplace_back(
         winrt::to_string(module.Name()),
         [module]() { return std::make_unique<ABIModule>(module); },
-        queueThread);
+        m_modulesWorkerQueue);
   }
 
   return modules;

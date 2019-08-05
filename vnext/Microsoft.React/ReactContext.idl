@@ -10,5 +10,13 @@ namespace Microsoft.ReactNative.Bridge
     {
         ReactContext();
         IReactInstance ReactInstance { get; };
+
+        // TODO: Look at supporting this functionality as used by modules
+        /*
+        void AddLifecycleEventListener(ILifecycleEventListener listener);
+        void RemoveLifecycleEventListener(ILifecycleEventListener listener);
+        void AddBackgroundEventListener(IBackgroundEventListener listener);
+        void RemoveBackgroundEventListener(IBackgroundEventListener listener);
+        */
     }
 }

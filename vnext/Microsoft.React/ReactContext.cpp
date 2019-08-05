@@ -7,8 +7,6 @@
 #include "Bridge.ReactContext.g.cpp"
 #endif
 
-//#include "ABIModule.h"
-
 using namespace winrt;
 using namespace Microsoft::ReactNative::Bridge;
 using namespace Windows::Foundation::Collections;

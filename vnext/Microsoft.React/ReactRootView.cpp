@@ -88,7 +88,12 @@ void ReactRootView::OnAcceleratorKeyActivated(
     ReactNative::ReactNativeHost const &host,
     CoreDispatcher const& /*sender*/,
     AcceleratorKeyEventArgs const& /*e*/) {
-  // TODO: Add DevSupportManager
+  // TODO: Add DevSupportManager which may also be the right place for
+  // some of the properties currently on the ReactInstanceSettings.
+  // It should also be wired up to a Developer menu that can be
+  // accessed in debug via the Shift+F10 key.  Consider what was done in
+  // https://github.com/microsoft/react-native-windows/pull/2862/files
+  // and the C# DevSupportManager.
   if (host.HasInstance()) {
     // auto reactInstanceManager = host.ReactInstanceManager();
     // if (reactInstanceManager.DevSupportManager().IsEnabled()) {
