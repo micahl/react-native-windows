@@ -7,7 +7,7 @@ namespace Microsoft.ReactNative.Bridge
 {
 	interface IReactInstance
 	{
-    VectorView<NativeModuleBase> NativeModules { get; };
+    IVectorView<NativeModuleBase> NativeModules { get; };
     void InvokeFunction(String moduleName, String method, IVectorView<IInspectable> arguments);
     Windows.Foundation.IAsyncAction InitializeAsync();
 	};

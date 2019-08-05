@@ -75,7 +75,7 @@ fire_and_forget ReactRootView::StartReactApplicationAsync(
 
 void ReactRootView::OnBackRequested(
     ReactNative::ReactNativeHost const &host,
-    IInspectable const& sender,
+    IInspectable const& /*sender*/,
     BackRequestedEventArgs const& e) {
   auto hostImpl = host.as<ReactNativeHost>();
   if (hostImpl->HasInstance()) {
@@ -86,8 +86,8 @@ void ReactRootView::OnBackRequested(
 
 void ReactRootView::OnAcceleratorKeyActivated(
     ReactNative::ReactNativeHost const &host,
-    CoreDispatcher const &sender,
-    AcceleratorKeyEventArgs const &e) {
+    CoreDispatcher const& /*sender*/,
+    AcceleratorKeyEventArgs const& /*e*/) {
   // TODO: Add DevSupportManager
   if (host.HasInstance()) {
     // auto reactInstanceManager = host.ReactInstanceManager();
